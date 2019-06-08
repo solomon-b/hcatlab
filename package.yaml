@@ -25,6 +25,7 @@ dependencies:
 library:
   source-dirs: src
   default-extensions: NoImplicitPrelude
+                    , InstanceSigs
 
 executables:
   myPrelude-exe:
