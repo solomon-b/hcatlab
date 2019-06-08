@@ -1,9 +1,7 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE InstanceSigs #-}
-module Control.Monad where
+module Typeclasses.Monad where
 
-import Control.Functor
-import Control.Applicative
+import Typeclasses.Functor
+import Typeclasses.Applicative
 
 {-
 The Monad class defines the basic operations over a monad, a concept
@@ -31,11 +29,9 @@ The above laws imply:
 and that pure and (<*>) satisfy the applicative functor laws.
 -}
 
-class Applicative m => Monad m where 
+class Applicative m => Monad m where
   return :: a -> m a
   infixl 1 >>=
   (>>=) :: (a -> m b) -> m a -> m b
   infixl 1 >>
   (>>) :: m a -> m b -> m b
-  
-  

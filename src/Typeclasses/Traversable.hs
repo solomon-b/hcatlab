@@ -1,9 +1,9 @@
-module Control.Traversable where
+module Typeclasses.Traversable where
 
-import Control.Functor
-import Control.Applicative
-import Control.Monad
-import Control.Foldable
+import Typeclasses.Functor
+import Typeclasses.Applicative
+import Typeclasses.Monad
+import Typeclasses.Foldable
 
 {-
 Functors representing data structures that can be traversed from left to right.
@@ -27,7 +27,7 @@ composition
     sequenceA . fmap Compose = Compose . fmap sequenceA . sequenceA
 -}
 class (Functor t, Foldable t) => Traversable t where
-  traverse :: Applicative f => (a -> f b) -> t a -> f (t b) 
+  traverse :: Applicative f => (a -> f b) -> t a -> f (t b)
   sequenceA :: Applicative f => t (f a) -> f (t a)
   mapM :: Monad m => (a -> m b) -> t a -> m (t b)
-  sequence :: Monad m => t (m a) -> m (t a) 
+  sequence :: Monad m => t (m a) -> m (t a)

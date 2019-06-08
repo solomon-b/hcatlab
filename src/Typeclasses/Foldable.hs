@@ -1,7 +1,11 @@
 {-# LANGUAGE RankNTypes #-}
-module Control.Foldable where
+module Typeclasses.Foldable where
 
-import Control.Monoid
+import Typeclasses.Eq
+import Typeclasses.Ord
+import Typeclasses.Ring
+import Typeclasses.Monoid
+import Data.Bool
 {-
 Data structures that can be folded.
 
@@ -46,14 +50,14 @@ which implies that:
   foldMap f . fmap g = foldMap (f . g)
 -}
 
-class Foldable t where 
-  foldMap :: Monoid m => (a -> m) -> t a -> m 
+class Foldable t where
+  foldMap :: Monoid m => (a -> m) -> t a -> m
   foldr :: (a -> b -> b) -> b -> t a -> b
-  foldl :: (b -> a -> b) -> b -> t a -> b 
+  foldl :: (b -> a -> b) -> b -> t a -> b
   foldr1 :: (a -> a -> a) -> t a -> a
-  foldl1 :: (a -> a -> a) -> t a -> a 
+  foldl1 :: (a -> a -> a) -> t a -> a
   elem :: Eq a => a -> t a -> Bool
-  maximum :: forall a. Ord a => t a -> a 
-  minimum :: forall a. Ord a => t a -> a 
-  sum :: Num a => t a -> a 
-  product :: Num a => t a -> a 
+  maximum :: forall a. Ord a => t a -> a
+  minimum :: forall a. Ord a => t a -> a
+  sum :: Ring a => t a -> a
+  product :: Ring a => t a -> a

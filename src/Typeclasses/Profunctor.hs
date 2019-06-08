@@ -1,1 +1,1 @@
-module Control.Profunctor where
+module Typeclasses.Profunctor where

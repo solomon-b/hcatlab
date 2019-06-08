@@ -1,6 +1,6 @@
-module Control.Applicative where
+module Typeclasses.Applicative where
 
-import Control.Functor
+import Typeclasses.Functor
 {-
 A functor with application, providing operations to embed pure
 expressions (pure), and sequence computations and combine their

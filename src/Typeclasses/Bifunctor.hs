@@ -1,4 +1,4 @@
-module Control.Bifunctor where
+module Typeclasses.Bifunctor where
 
 {-
 A bifunctor is a type constructor that takes two type arguments and is

@@ -1,1 +1,1 @@
-module Control.Comonad where
+module Typeclasses.Comonad where

@@ -1,1 +1,1 @@
-module Control.Arrow where
+module Typeclasses.Arrow where

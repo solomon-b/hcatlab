@@ -1,7 +1,7 @@
-module Control.Monoid where
+module Typeclasses.Monoid where
 
+import Typeclasses.Semigroup
 import Data.List (List)
-import Control.Semigroup
 
 {-
 The class of monoids (types with an associative binary operation that
@@ -20,7 +20,7 @@ addition and multiplication on numbers. In such cases we often define
 newtypes and make those instances of Monoid, e.g. Sum and Product.
 -}
 
-class Semigroup a => Monoid a where 
+class Semigroup a => Monoid a where
   mempty :: a
   mappend :: a -> a -> a
   mconcat :: List a -> a

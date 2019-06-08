@@ -1,4 +1,4 @@
-module Control.Semigroup where
+module Typeclasses.Semigroup where
 
 {-
 The class of semigroups (types with an associative binary operation).

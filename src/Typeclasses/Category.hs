@@ -1,1 +1,1 @@
-module Control.Category where
+module Typeclasses.Category where

@@ -1,1 +1,1 @@
-module Control.Lens where
+module Typeclasses.Lens where
