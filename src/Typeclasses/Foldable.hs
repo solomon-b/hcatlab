@@ -1,8 +1,7 @@
 {-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE InstanceSigs #-}
-module Data.Foldable where
+module Control.Foldable where
 
-import Data.Monoid
+import Control.Monoid
 {-
 Data structures that can be folded.
 

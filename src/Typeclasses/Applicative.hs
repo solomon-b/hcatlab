@@ -1,5 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE InstanceSigs #-}
 module Control.Applicative where
 
 import Control.Functor

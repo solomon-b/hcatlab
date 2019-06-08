@@ -1,3 +1,5 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE InstanceSigs #-}
 module Data.String where
+
+import GHC.Types
+
+type String = [Char]

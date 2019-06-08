@@ -1,6 +1,4 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE InstanceSigs #-}
-module Data.Semigroup where
+module Control.Semigroup where
 
 {-
 The class of semigroups (types with an associative binary operation).

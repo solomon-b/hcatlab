@@ -1,8 +1,7 @@
-{-# LANGUAGE InstanceSigs #-}
-module Data.Monoid where
+module Control.Monoid where
 
 import Data.List (List)
-import Data.Semigroup
+import Control.Semigroup
 
 {-
 The class of monoids (types with an associative binary operation that

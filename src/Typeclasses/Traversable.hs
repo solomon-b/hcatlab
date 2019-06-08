@@ -1,10 +1,9 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-module Data.Traversable where
+module Control.Traversable where
 
 import Control.Functor
 import Control.Applicative
 import Control.Monad
-import Data.Foldable
+import Control.Foldable
 
 {-
 Functors representing data structures that can be traversed from left to right.
