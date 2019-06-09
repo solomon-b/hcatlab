@@ -1,11 +1,11 @@
-{-# LANGUAGE RankNTypes #-}
 module Typeclasses.Foldable where
+
+import Prelude (Bool, Num(..))
 
 import Typeclasses.Eq
 import Typeclasses.Ord
 import Typeclasses.Ring
 import Typeclasses.Monoid
-import Data.Bool
 {-
 Data structures that can be folded.
 
@@ -57,7 +57,9 @@ class Foldable t where
   foldr1 :: (a -> a -> a) -> t a -> a
   foldl1 :: (a -> a -> a) -> t a -> a
   elem :: Eq a => a -> t a -> Bool
-  maximum :: forall a. Ord a => t a -> a
-  minimum :: forall a. Ord a => t a -> a
-  sum :: Ring a => t a -> a
-  product :: Ring a => t a -> a
+  maximum :: Ord a => t a -> a
+  minimum :: Ord a => t a -> a
+  sum :: Num a => t a -> a
+  sum = foldr (+) 0
+  product :: Num a => t a -> a
+  product = foldr (*) 1

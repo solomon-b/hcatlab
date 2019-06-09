@@ -1,6 +1,6 @@
 module Typeclasses.Ring where
 
-import GHC.Integer
+import GHC.Integer (Integer)
 import Typeclasses.Rig
 import Typeclasses.Rng
 

@@ -1,6 +1,5 @@
 module Typeclasses.Functor where
 
-import Data.List
 import Unsorted
 {-
 The Functor class is used for types that can be mapped over. Instances of Functor should satisfy the following laws:
@@ -31,12 +30,3 @@ infixl 1 <&>
 
 void :: Functor f => f a -> f ()
 void = (<$) ()
-
------------------
---- INSTANCES ---
------------------
-
-instance Functor List where
-  fmap :: (a -> b) -> List a -> List b
-  fmap f (Cons x xs) = Cons (f x) (fmap f xs)
-  fmap f Nil = Nil

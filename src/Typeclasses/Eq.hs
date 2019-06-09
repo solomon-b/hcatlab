@@ -1,6 +1,6 @@
 module Typeclasses.Eq where
 
-import Data.Bool (Bool)
+import Prelude (Bool)
 {-
 Reflexivity
     x == x = True

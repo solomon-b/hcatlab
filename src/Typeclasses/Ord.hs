@@ -1,7 +1,8 @@
 module Typeclasses.Ord where
 
+import Prelude (Bool)
+
 import Typeclasses.Eq
-import Data.Bool
 import Data.Ordering
 {-
 The Ord class is used for totally ordered datatypes.

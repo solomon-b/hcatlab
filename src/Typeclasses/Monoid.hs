@@ -1,7 +1,6 @@
 module Typeclasses.Monoid where
 
 import Typeclasses.Semigroup
-import Data.List (List)
 
 {-
 The class of monoids (types with an associative binary operation that
@@ -23,4 +22,4 @@ newtypes and make those instances of Monoid, e.g. Sum and Product.
 class Semigroup a => Monoid a where
   mempty :: a
   mappend :: a -> a -> a
-  mconcat :: List a -> a
+  mconcat :: [a] -> a

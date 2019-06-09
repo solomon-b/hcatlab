@@ -1,74 +1,124 @@
 module Data.List where
 
-data List a = Nil | Cons a (List a)
+import Prelude (undefined, Bool(..), Int, Num(..))
 
-{-
-(++) :: [a] -> [a] -> [a] infixr 5
+import Unsorted (($))
 
-Append two lists, i.e.,
+import Typeclasses.Semigroup
+import Typeclasses.Monoid
+import Typeclasses.Functor
+import Typeclasses.Applicative
+import Typeclasses.Monad
+import Typeclasses.Foldable
 
-[x1, ..., xm] ++ [y1, ..., yn] == [x1, ..., xm, y1, ..., yn]
-[x1, ..., xm] ++ [y1, ...] == [x1, ..., xm, y1, ...]
+import Data.Maybe (Maybe(..))
+import Data.Bool
 
-If the first list is not finite, the result is the first list.
+-------------------
+--- TYPECLASSES ---
+-------------------
+
+instance Semigroup [a] where
+  (<>) :: [a] -> [a] -> [a]
+  (<>) = (++)
+
+instance Monoid [a] where
+  mempty :: [a]
+  mempty = []
+  mappend :: [a] -> [a] -> [a]
+  mappend = (<>)
+  mconcat :: [[a]] -> [a]
+  mconcat = undefined
+
+instance Functor [] where
+  fmap :: (a -> b) -> [a] -> [b]
+  fmap f (x:xs) = f x:fmap f xs
+  fmap f [] = []
+
+instance Applicative [] where
+  pure :: a -> [a]
+  pure a = [a]
+  (<*>) :: [a -> b] -> [a] -> [b]
+  (<*>) (f:fs) xs = (f <$> xs) ++ (fs <*> xs)
+  (*>) :: [a] -> [b] -> [b]
+  (*>) xs ys = [y | _ <- xs, y <- ys]
+  (<*) :: [a] -> [b] -> [a]
+  (<*) xs ys = [x | x <- xs, _ <- ys]
+
+instance Monad [] where
+  return :: a -> [a]
+  return = pure
+  (>>=) :: (a -> [b]) -> [a] -> [b]
+  (>>=) f ma = foldr (++) [] $ fmap f ma
+  (>>) :: [a] -> [b] -> [b]
+  (>>) = (*>)
+
+instance Foldable [] where
+  foldMap = undefined
+  foldr = undefined
+  foldl = undefined
+  foldr1 = undefined
+  foldl1 = undefined
+  elem = undefined
+  
+-------------------
+--- COMBINATORS ---
+-------------------
+
+infixr 5 ++
+(++) :: [a] -> [a] -> [a]
+(++) xs [] = xs
+(++) [] ys = ys
+(++) (x:xs) ys = x:(xs ++ ys)
 
 head :: [a] -> a
-
-Extract the first element of a list, which must be non-empty.
+head [] = undefined
+head (x:_) = x
 
 last :: [a] -> a
-
-Extract the last element of a list, which must be finite and non-empty.
+last [] = undefined
+last [x] = x
+last (_:xs) = last xs
 
 tail :: [a] -> [a]
-
-Extract the elements after the head of a list, which must be non-empty.
+tail [] = undefined
+tail (_:xs) = xs
 
 init :: [a] -> [a]
-
-Return all the elements of a list except the last one. The list must be non-empty.
+init [] = undefined
+init [x] = []
+init (x:xs) = x:init xs
 
 uncons :: [a] -> Maybe (a, [a])
-
-Decompose a list into its head and tail. If the list is empty, returns Nothing. If the list is non-empty, returns Just (x, xs), where x is the head of the list and xs its tail.
-
-Since: base-4.8.0.0
+uncons [] = Nothing
+uncons (x:xs) = Just (x, xs)
 
 null :: Foldable t => t a -> Bool
-
-Test whether the structure is empty. The default implementation is optimized for structures that are similar to cons-lists, because there is no general way to do better.
+null = foldr (\_ _ -> True) False -- TODO: Check if this needs to be inverted
 
 length :: Foldable t => t a -> Int
-
-Returns the size/length of a finite structure as an Int. The default implementation is optimized for structures that are similar to cons-lists, because there is no general way to do better.
-List transformations
+length = foldr (\_ i -> i + 1) 0
 
 map :: (a -> b) -> [a] -> [b]
-
-map f xs is the list obtained by applying f to each element of xs, i.e.,
-
-map f [x1, x2, ..., xn] == [f x1, f x2, ..., f xn]
-map f [x1, x2, ...] == [f x1, f x2, ...]
+map = fmap
 
 reverse :: [a] -> [a]
-
-reverse xs returns the elements of xs in reverse order. xs must be finite.
+reverse [] = []
+reverse (x:xs) = reverse xs ++ [x]
 
 intersperse :: a -> [a] -> [a]
+intersperse _ [] = []
+intersperse _ [x] = [x]
+intersperse y (x:xs) = x:y:intersperse y xs
 
-The intersperse function takes an element and a list and `intersperses' that element between the elements of the list. For example,
+--intercalate :: [a] -> [[a]] -> [a]
+--intercalate xs = concat . (intersperse xs)
+--intercalate xs xss is equivalent to (concat (intersperse xs xss)). It inserts the list xs in between the lists in xss and concatenates the result.
 
->>> intersperse ',' "abcde"
-"a,b,c,d,e"
-
-intercalate :: [a] -> [[a]] -> [a]
-
-intercalate xs xss is equivalent to (concat (intersperse xs xss)). It inserts the list xs in between the lists in xss and concatenates the result.
-
->>> intercalate ", " ["Lorem", "ipsum", "dolor"]
-"Lorem, ipsum, dolor"
-
-transpose :: [[a]] -> [[a]]
+--transpose :: [[a]] -> [[a]]
+--transpose [] = []
+--transpose 
+{-
 
 The transpose function transposes the rows and columns of its argument. For example,
 
