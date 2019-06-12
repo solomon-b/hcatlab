@@ -1,6 +1,6 @@
 module Typeclasses.Functor where
 
-import Unsorted
+import Data.Function
 {-
 The Functor class is used for types that can be mapped over. Instances of Functor should satisfy the following laws:
 

@@ -1,5 +1,4 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-module Unsorted where
+module Data.Function where
 
 infixr 9 .
 (.) :: (b -> c) -> (a -> b) -> (a -> c)
@@ -15,5 +14,13 @@ infixr 0 $
 ($) :: (a -> b) -> a -> b
 ($) f = f
 
+infixr 1 &
+(&) :: a -> (a -> b) -> b
+(&) a f = f a
+
 id :: a -> a
 id a = a
+
+fix :: (a -> a) -> a
+fix f = let x = f x in x
+ 

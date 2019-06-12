@@ -2,7 +2,6 @@ module Data.List where
 
 import Prelude (undefined, Bool(..), Int, Num(..))
 
-import Unsorted (($), (.))
 
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
@@ -11,8 +10,9 @@ import Typeclasses.Applicative
 import Typeclasses.Monad
 import Typeclasses.Foldable
 
-import Data.Maybe (Maybe(..))
 import Data.Bool
+import Data.Function (($), (.))
+import Data.Maybe (Maybe(..))
 
 -------------------
 --- TYPECLASSES ---

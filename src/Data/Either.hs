@@ -2,7 +2,7 @@ module Data.Either where
 
 import Prelude (Show)
 
-import Unsorted (($))
+import Data.Function (($))
 import Typeclasses.Functor
 
 data Either a b = Left a | Right b

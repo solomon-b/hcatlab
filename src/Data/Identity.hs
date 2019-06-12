@@ -2,7 +2,7 @@ module Data.Identity where
 
 import Prelude (Show)
 
-import Unsorted (($))
+import Data.Function (($))
 import Typeclasses.Functor
 
 newtype Identity a = Identity { runIdentity :: a }

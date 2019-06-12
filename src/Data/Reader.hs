@@ -2,7 +2,7 @@ module Data.Reader where
 
 import Prelude (Show, undefined)
 
-import Unsorted (($), (.), const)
+import Data.Function (($), (.), const)
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor

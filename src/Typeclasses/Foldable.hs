@@ -2,10 +2,6 @@ module Typeclasses.Foldable where
 
 import Prelude (Bool(..), Num(..), errorWithoutStackTrace)
 
-import Data.Coerce
-
-import Unsorted (($), (.))
-
 import Typeclasses.Eq
 import Typeclasses.Ord
 import Typeclasses.Ring
@@ -14,6 +10,7 @@ import Typeclasses.Monoid
 import Typeclasses.Functor
 
 import Data.Maybe
+import Data.Function (($), (.))
 
 
 -- (#.) :: Coercible b c => (b -> c) -> (a -> b) -> (a -> c)

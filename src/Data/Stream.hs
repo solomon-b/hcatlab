@@ -2,7 +2,7 @@ module Data.Stream where
 
 import Prelude (Show)
 
-import Unsorted (($))
+import Data.Function (($))
 import Typeclasses.Functor
 
 data Stream a = Stream a (Stream a)

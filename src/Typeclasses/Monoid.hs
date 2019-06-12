@@ -2,7 +2,7 @@ module Typeclasses.Monoid where
 
 import Prelude (Bool(..), undefined, Bounded(..))
 
-import Unsorted (id)
+import Data.Function (id)
 
 import Typeclasses.Numerics
 import Typeclasses.Ord

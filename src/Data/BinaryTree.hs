@@ -2,7 +2,7 @@ module Data.BinaryTree where
 
 import Prelude (Show)
 
-import Unsorted (($))
+import Data.Function (($))
 import Typeclasses.Functor
 
 data BinaryTree a = Leaf a | Node (BinaryTree a) (BinaryTree a)

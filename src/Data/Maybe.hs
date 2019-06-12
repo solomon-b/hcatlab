@@ -2,7 +2,7 @@ module Data.Maybe where
 
 import Prelude (Show)
 
-import Unsorted (($))
+import Data.Function (($))
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor

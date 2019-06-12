@@ -2,8 +2,9 @@ module Data.Tree where
 
 import Prelude (Show)
 
-import Unsorted (($), (.))
 import Typeclasses.Functor
+
+import Data.Function (($), (.))
 import Data.List
 
 

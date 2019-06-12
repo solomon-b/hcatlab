@@ -2,7 +2,7 @@ module Typeclasses.Semigroup where
 
 import Prelude (Show, Bool, errorWithoutStackTrace, undefined)
 
-import Unsorted (($), (.))
+import Data.Function (($), (.))
 
 import Typeclasses.Numerics
 import Typeclasses.Ord
