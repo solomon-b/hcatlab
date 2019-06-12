@@ -1,11 +1,23 @@
 module Typeclasses.Foldable where
 
-import Prelude (Bool, Num(..))
+import Prelude (Bool(..), Num(..), errorWithoutStackTrace)
+
+import Data.Coerce
+
+import Unsorted (($), (.))
 
 import Typeclasses.Eq
 import Typeclasses.Ord
 import Typeclasses.Ring
+import Typeclasses.Semigroup
 import Typeclasses.Monoid
+import Typeclasses.Functor
+
+import Data.Maybe
+
+
+-- (#.) :: Coercible b c => (b -> c) -> (a -> b) -> (a -> c)
+-- (#.) f g = \x -> f 
 {-
 Data structures that can be folded.
 
@@ -52,14 +64,23 @@ which implies that:
 
 class Foldable t where
   foldMap :: Monoid m => (a -> m) -> t a -> m
+  foldMap f = foldr (mappend . f) mempty
   foldr :: (a -> b -> b) -> b -> t a -> b
+  foldr f z t = appEndo (foldMap (Endo . f) t) z
   foldl :: (b -> a -> b) -> b -> t a -> b
   foldr1 :: (a -> a -> a) -> t a -> a
   foldl1 :: (a -> a -> a) -> t a -> a
   elem :: Eq a => a -> t a -> Bool
+  elem a = any (== a)
   maximum :: Ord a => t a -> a
+  maximum = fromMaybe (errorWithoutStackTrace "minimum: empty structure") . fmap getMax . foldMap (Just . Max)
   minimum :: Ord a => t a -> a
+  minimum = fromMaybe (errorWithoutStackTrace "minimum: empty structure") . fmap getMin . foldMap (Just . Min)
   sum :: Num a => t a -> a
   sum = foldr (+) 0
   product :: Num a => t a -> a
   product = foldr (*) 1
+
+
+any :: Foldable t => (a -> Bool) -> t a -> Bool
+any p = getAny . foldMap (Any . p)

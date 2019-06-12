@@ -15,3 +15,5 @@ infixr 0 $
 ($) :: (a -> b) -> a -> b
 ($) f = f
 
+id :: a -> a
+id a = a

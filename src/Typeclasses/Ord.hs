@@ -42,5 +42,5 @@ class Eq a => Ord a where
   (>) :: a -> a -> Bool
   infix 4 >=
   (>=) :: a -> a -> Bool
-  max :: a -> a -> Bool
-  min :: a -> a -> Bool
+  max :: a -> a -> a
+  min :: a -> a -> a

@@ -2,7 +2,7 @@ module Data.List where
 
 import Prelude (undefined, Bool(..), Int, Num(..))
 
-import Unsorted (($))
+import Unsorted (($), (.))
 
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
@@ -25,10 +25,6 @@ instance Semigroup [a] where
 instance Monoid [a] where
   mempty :: [a]
   mempty = []
-  mappend :: [a] -> [a] -> [a]
-  mappend = (<>)
-  mconcat :: [[a]] -> [a]
-  mconcat = undefined
 
 instance Functor [] where
   fmap :: (a -> b) -> [a] -> [b]
@@ -54,8 +50,12 @@ instance Monad [] where
   (>>) = (*>)
 
 instance Foldable [] where
-  foldMap = undefined
-  foldr = undefined
+  foldMap :: Monoid m => (a -> m) -> [a] -> m
+  foldMap f = foldr (mappend . f) mempty
+  foldr :: (a -> b -> b) -> b -> [a] -> b
+  foldr _ b [] = b
+  foldr f b (x:xs) = x `f` foldr f b xs
+  foldl :: (b -> a -> b) -> b -> [a] -> b
   foldl = undefined
   foldr1 = undefined
   foldl1 = undefined

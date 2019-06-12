@@ -1,6 +1,10 @@
+{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE StandaloneDeriving #-}
 module Typeclasses.Eq where
 
-import Prelude (Bool)
+import Prelude (Ordering, Bool)
+
+import Data.Bool
 {-
 Reflexivity
     x == x = True
@@ -17,5 +21,10 @@ Negation
 class Eq a where
   infix 4 ==
   (==) :: a -> a -> Bool
+  (==) x y = not (x /= y)
   infix 4 /=
   (/=) :: a -> a -> Bool
+  (/=) x y = not (x == y)
+
+deriving instance Eq Bool
+deriving instance Eq Ordering
