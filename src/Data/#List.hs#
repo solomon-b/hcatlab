@@ -21,7 +21,7 @@ import Data.Maybe (Maybe(..))
 
 instance Semigroup [a] where
   (<>) :: [a] -> [a] -> [a]
-  (<>) = (++)
+  (<>) = (++
 
 instance Monoid [a] where
   mempty :: [a]

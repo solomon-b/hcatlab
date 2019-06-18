@@ -63,6 +63,8 @@ instance Num a => Monoid (Product a) where
 instance Monoid (Endo a) where
   mempty = Endo id
 
+instance Monoid a => Monoid (Dual a) where
+  mempty = Dual mempty
   
 -------------------
 --- COMBINATORS ---

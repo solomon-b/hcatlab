@@ -79,5 +79,14 @@ class Foldable t where
   product = foldr (*) 1
 
 
+and :: Foldable t => t Bool -> Bool
+and = getAll . foldMap All
+
+or :: Foldable t => t Bool -> Bool
+or = getAny . foldMap Any
+
 any :: Foldable t => (a -> Bool) -> t a -> Bool
-any p = getAny . foldMap (Any . p)
+any f = getAny . foldMap (Any . f)
+
+all :: Foldable t => (a -> Bool) -> t a -> Bool
+all f = getAll . foldMap (All . f)

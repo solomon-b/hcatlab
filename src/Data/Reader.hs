@@ -8,6 +8,7 @@ import Typeclasses.Monoid
 import Typeclasses.Functor
 import Typeclasses.Applicative
 import Typeclasses.Monad
+import Typeclasses.Comonad
 
 newtype Reader r a = Reader { runReader :: r -> a }
 
@@ -41,8 +42,10 @@ instance Applicative (Reader r) where
 instance Monad (Reader r) where
   return :: a -> Reader r a
   return = pure
-  (>>=) :: (a -> Reader r b) -> Reader r a -> Reader r b
-  (>>=) f (Reader ra) = Reader $ \r ->
+  (>>=) :: Reader r a -> (a -> Reader r b) -> Reader r b
+  (>>=) (Reader ra) f = Reader $ \r ->
     let a = ra r
         (Reader rb) = f a
     in rb r
+
+instance Monoid r => Comonad (Reader r) where

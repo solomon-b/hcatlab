@@ -1,11 +1,14 @@
 {-# LANGUAGE DeriveAnyClass #-}
 module Typeclasses.Numerics where
 
-import Prelude (Word, Int, Integer, Float, Double, Enum, Show, undefined)
+import Prelude (Word, Int, Integer, Float, Double, Bool, Enum, Show, undefined)
 import qualified Prelude as P (Num(..), Real(..), Integral(..))
 
 import Typeclasses.Eq
 import Typeclasses.Ord
+
+import Data.Bool
+import Data.Function
 
 
 -----------
@@ -100,3 +103,15 @@ class (Real a, Enum a) => Integral a where
   quotRem :: a -> a -> (a, a)
   divMod  :: a -> a -> (a, a)
   toInteger :: a -> Integer
+
+
+-------------------
+--- COMBINATORS ---
+-------------------
+
+
+even :: Integral a => a -> Bool
+even n = n `rem` 2 == 0
+
+odd :: Integral a => a -> Bool
+odd = not . even

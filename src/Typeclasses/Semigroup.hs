@@ -5,8 +5,10 @@ import Prelude (Show, Bool, errorWithoutStackTrace, undefined)
 import Data.Function (($), (.))
 
 import Typeclasses.Numerics
+import Typeclasses.Eq
 import Typeclasses.Ord
-import Data.NonEmpty
+
+import Data.NonEmpty.Type
 import Data.Bool
 
 {-
@@ -27,7 +29,17 @@ class Semigroup a where
   stimes :: Integral b => b -> a -> a 
   stimes y x
     | y <= 0 = errorWithoutStackTrace "stimes: positive multiplier expected"
-    | otherwise = undefined
+    | otherwise = f x y
+      where
+        f x y
+          | even y = f (x <> x) (y `quot` 2)
+          | y == 1 = x
+          | otherwise = g (x <> x) (y `quot` 2) x
+        g x y z
+          | even y = g (x <> x) (y `quot` 2) z
+          | y == 1 = x <> z
+          | otherwise = g (x <> x) (y `quot` 2) (x <> z)
+
 
 ------------------------
 --- NEWTYPE WRAPPERS ---
@@ -78,5 +90,6 @@ instance Num a => Semigroup (Product a) where
 instance Semigroup (Endo a) where
   (<>) (Endo f) (Endo g) = Endo $ f . g
 
-instance Semigroup (Dual a) where
-  (<>) = undefined
+instance Semigroup a => Semigroup (Dual a) where
+  (<>) (Dual x) (Dual y) = Dual $ y <> x
+  stimes n (Dual x) = Dual $ stimes n x
