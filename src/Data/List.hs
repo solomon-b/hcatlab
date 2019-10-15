@@ -7,13 +7,14 @@ import Typeclasses.Ord
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Foldable
 
 import Data.Bool
-import Data.Function (($), (.))
+import Data.Function
 import Data.Maybe (Maybe(..))
+
 
 -------------------
 --- TYPECLASSES ---
@@ -46,7 +47,7 @@ instance Monad [] where
   return :: a -> [a]
   return = pure
   (>>=) :: [a] -> (a -> [b]) -> [b]
-  (>>=) ma f = foldr (++) [] $ fmap f ma
+  (>>=) = flip Data.List.concatMap
   (>>) :: [a] -> [b] -> [b]
   (>>) = (*>)
 
@@ -56,7 +57,7 @@ instance Foldable [] where
   foldr :: (a -> b -> b) -> b -> [a] -> b
   foldr _ b [] = b
   foldr f b (x:xs) = x `f` foldr f b xs
-  
+
 
 -------------------
 --- COMBINATORS ---
@@ -114,7 +115,7 @@ intersperse y (x:xs) = x:y:intersperse y xs
 
 transpose :: [[a]] -> [[a]]
 transpose [] = []
-transpose xs@(x:xs') = (foldr f [] xs) : (transpose xs')
+transpose xs@(x:xs') = foldr f [] xs : transpose xs'
   where
     f [] b = b
     f (y:ys) b = y : b
@@ -148,7 +149,7 @@ The permutations function returns the list of all permutations of the argument.
 
 -}
 concat :: Foldable t => t [a] -> [a]
-concat = foldr (++) []
+concat = Typeclasses.Foldable.concat
 
 concatMap :: Foldable t => (a -> [b]) -> t a -> [b]
 concatMap = foldMap

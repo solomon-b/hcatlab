@@ -7,7 +7,7 @@ import Data.Function
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Foldable
 import Typeclasses.Traversable
@@ -46,4 +46,4 @@ instance Foldable (Const c) where
 
 instance Traversable (Const c) where
   sequenceA :: Const c (f a) -> f (Const c a)
-  sequenceA (Const fa) = undefined
+  sequenceA (Const c) = undefined

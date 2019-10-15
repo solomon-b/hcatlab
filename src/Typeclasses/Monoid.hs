@@ -65,7 +65,8 @@ instance Monoid (Endo a) where
 
 instance Monoid a => Monoid (Dual a) where
   mempty = Dual mempty
-  
+
+
 -------------------
 --- COMBINATORS ---
 -------------------

@@ -7,10 +7,12 @@ import Data.Function
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Foldable
 import Typeclasses.Traversable
+
+newtype IdentityT f a = IdentityT { runIdentityT :: f a }
 
 newtype Identity a = Identity { runIdentity :: a }
   deriving Show
@@ -44,7 +46,7 @@ instance Monad Identity where
   return :: a -> Identity a
   return = pure
   (>>=) :: Identity a -> (a -> Identity b) -> Identity b
-  (>>=) (Identity a) f = f a
+  (>>=) a f = join $ f <$> a
 
 instance Foldable Identity where
   foldr :: (a -> b -> b) -> b -> Identity a -> b

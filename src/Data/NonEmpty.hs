@@ -5,7 +5,7 @@ import Data.Function
 
 import Typeclasses.Semigroup
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Traversable
 import Typeclasses.Comonad

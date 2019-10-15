@@ -30,7 +30,7 @@ composition
 -}
 class (Functor t, Foldable t) => Traversable t where
   traverse :: Applicative f => (a -> f b) -> t a -> f (t b)
-  traverse f = sequenceA . fmap f
+  traverse = sequenceA ... fmap
   sequenceA :: Applicative f => t (f a) -> f (t a)
   sequenceA = traverse id
   mapM :: Monad m => (a -> m b) -> t a -> m (t b)
@@ -43,14 +43,11 @@ class (Functor t, Foldable t) => Traversable t where
 --- COMBINATORS ---
 -------------------
 
---mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b) 
---mapM = traverse
-  
---mapM_ :: (Foldable t, Monad m) => (a -> m b) -> t a -> m () 
---mapM_ f ta = 
+traverse_ :: (Traversable t, Monad m) => (a -> m b) -> t a -> m ()
+traverse_ = void ... traverse
 
---forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b) 
---forM = flip mapM
---
---forM_ :: (Foldable t, Monad m) => t a -> (a -> m b) -> m () 
---forM_ = flip mapM_
+forM :: (Traversable t, Monad m) => t a -> (a -> m b) -> m (t b)
+forM = flip traverse
+
+forM_ :: (Traversable t, Monad m) => t a -> (a -> m b) -> m ()
+forM_ = void ... forM

@@ -6,7 +6,7 @@ module Data.State where
 import Prelude (undefined)
 
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 
 import Data.Function
@@ -25,11 +25,15 @@ runState m = runIdentity . runStateT m
 --- TYPECLASS INSTANCES ---
 ---------------------------
 
-instance Functor (StateT s m) where
-  --fmap :: (a -> b) -> State s a -> State s b
-  --fmap f (State g) = State $ \s -> let (a, s') = g s in (f a, s')
+--instance Functor (StateT s m) where
+--  --fmap :: (a -> b) -> State s a -> State s b
+--  --fmap f (State g) = State $ \s -> let (a, s') = g s in (f a, s')
+--
+--instance Monad (StateT s m) where
+--  return = undefined
+--  (>>=) (StateT g) f = StateT $ \s ->
 
-
+    
 --instance Applicative (State s) where
 --  pure :: a -> State s a
 --  pure a = State $ \s -> (a, s)
@@ -43,9 +47,9 @@ instance Functor (StateT s m) where
 --instance Monad (State s) where
 --  return :: a -> State s a
 --  return = pure
---  (>>=) :: State s a -> (a -> State s b) -> State s b
---  (>>=) (State sa) f = State $ 
---    \s ->
---      let (a, s') = sa s
---      in runState (f a) s'
+--(>>=) :: State s a -> (a -> State s b) -> State s b
+--(>>=) (State sa) f = State $ 
+--  \s ->
+--    let (a, s') = sa s
+--    in runState (f a) s'
           

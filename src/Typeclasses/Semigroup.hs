@@ -66,6 +66,8 @@ newtype Endo a = Endo { appEndo :: a -> a }
 -- | The dual of a Monoid, obtained by swapping the arguments of mappend
 newtype Dual a = Dual { getDual :: a }
 
+newtype First a = First { getFirst :: a }
+
 instance Semigroup () where
   (<>) _ _ = ()
 
@@ -93,3 +95,7 @@ instance Semigroup (Endo a) where
 instance Semigroup a => Semigroup (Dual a) where
   (<>) (Dual x) (Dual y) = Dual $ y <> x
   stimes n (Dual x) = Dual $ stimes n x
+
+instance Semigroup a => Semigroup (First a) where
+ (<>) a _ = a
+

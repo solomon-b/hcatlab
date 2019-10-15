@@ -7,7 +7,7 @@ import Typeclasses.Functor
 
 data BinaryTree a = Leaf a | Node (BinaryTree a) (BinaryTree a)
 
-  
+
 -------------------
 --- TYPECLASSES ---
 -------------------

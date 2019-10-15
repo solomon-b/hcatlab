@@ -3,12 +3,10 @@ module Typeclasses.Monad where
 import Prelude (Bool, undefined)
 
 import Typeclasses.Functor
-import Typeclasses.Applicative
-import Typeclasses.Foldable
-
---import Data.List
+import Typeclasses.Applicative.Class
 
 import Data.Function
+--import Data.List
 
 {-
 The Monad class defines the basic operations over a monad, a concept
@@ -61,35 +59,8 @@ infixr 1 <=<
 (<=<) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c 
 (<=<) = flip (>=>)
 
-forever :: Applicative f => f a -> f b 
-forever a = let a' = a *> a' in a'
-
 join :: Monad m => m (m a) -> m a
-join x = x >>= id
-
---msum :: (Foldable t, MonadPlus m) => t (m a) -> m a 
---msum = undefined
-
---mfilter :: MonadPlus m => (a -> Bool) -> m a -> m a 
---mfilter = undefined
-
---filterM :: Applicative m => (a -> m Bool) -> [a] -> m [a] 
---filterM f xs = foldr (\x -> liftA2 $ undefined) (pure []) xs
-
-mapAndUnzipM :: Applicative m => (a -> m (b, c)) -> [a] -> m ([b], [c]) 
-mapAndUnzipM = undefined
-
-zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c] 
-zipWithM = undefined
-
-zipWithM_ :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m () 
-zipWithM_ = undefined
-
-foldM :: (Foldable t, Monad m) => (b -> a -> m b) -> b -> t a -> m b 
-foldM = undefined
-
-foldM_ :: (Foldable t, Monad m) => (b -> a -> m b) -> b -> t a -> m () 
-foldM_ = undefined
+join = (=<<) id
 
 liftM :: Monad m => (a -> b) -> m a -> m b
 liftM f ma = ma >>= \a -> return $ f a

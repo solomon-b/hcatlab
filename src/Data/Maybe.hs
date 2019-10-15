@@ -2,16 +2,21 @@ module Data.Maybe where
 
 import Prelude (Show, undefined)
 
+--import Data.Identity
 import Data.Function
 
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative
---import Typeclasses.Monad
+import Typeclasses.Applicative.Class
+import Typeclasses.Monad
 --import Typeclasses.Foldable
 --import Typeclasses.Traversable
 
+data MaybeT f a = NothingT | JustT (f a)
+  deriving Show
+
+-- type Maybe a = MaybeT Identity a
 data Maybe a = Nothing | Just a
   deriving Show
 
@@ -39,15 +44,13 @@ instance Applicative Maybe where
   pure = Just
   (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
   (<*>) Nothing _ = Nothing
-  (<*>) _ Nothing = Nothing
-  (<*>) (Just f) (Just a) = Just $ f a
+  (<*>) (Just f) ma = f <$> ma
 
---instance Monad Maybe where
---  return :: a -> Maybe a
---  return = pure
---  (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
---  (>>=) Nothing _ = Nothing
---  (>>=) (Just a) f = f a
+instance Monad Maybe where
+  return :: a -> Maybe a
+  return = pure
+  (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
+  (>>=) ma = join . flip fmap ma
 
 --instance Foldable Maybe where
 --  foldr :: (a -> b -> b) -> b -> Maybe a -> b

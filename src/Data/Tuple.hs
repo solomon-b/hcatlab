@@ -4,7 +4,7 @@ import Prelude (undefined)
 
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Comonad
 

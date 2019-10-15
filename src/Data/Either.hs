@@ -6,7 +6,7 @@ import Data.Function
 
 import Typeclasses.Semigroup
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Foldable
 import Typeclasses.Traversable
@@ -35,15 +35,13 @@ instance Applicative (Either a) where
   pure = Right
   (<*>) :: Either a (b -> c) -> Either a b -> Either a c
   (<*>) (Left err) _ = Left err
-  (<*>) _ (Left err) = Left err
-  (<*>) (Right f) (Right b) = Right $ f b
+  (<*>) (Right f) b = f <$> b
 
 instance Monad (Either a) where
   return :: b -> Either a b
   return = pure
   (>>=) :: Either a b -> (b -> Either a c) -> Either a c
-  (>>=) (Left err) _ = Left err
-  (>>=) (Right b) f = f b
+  (>>=) e = join . flip fmap e 
 
 instance Foldable (Either a) where
   foldr :: (b -> c -> c) -> c -> Either a b -> c

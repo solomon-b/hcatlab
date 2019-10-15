@@ -1,10 +1,10 @@
 name:                myPrelude
 version:             0.1.0.0
-github:              "githubuser/myPrelude"
+github:              "ssbothwell/myPrelude"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2019 Author name here"
+author:              "Solomon Bothwell"
+maintainer:          "ssbothwell@gmail.com"
+copyright:           "2019 Solomon Bothwell"
 
 extra-source-files:
 - README.md
@@ -20,31 +20,66 @@ extra-source-files:
 description:         Please see the README on GitHub at <https://github.com/githubuser/myPrelude#readme>
 
 dependencies:
-- base >= 4.7 && < 5
+  - base >= 4.7 && < 5
+  - ghc-prim
+  - integer-gmp
 
 library:
   source-dirs: src
-  default-extensions: NoImplicitPrelude
-                    , InstanceSigs
-
-executables:
-  myPrelude-exe:
-    main:                Main.hs
-    source-dirs:         app
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - myPrelude
+  exposed-modules:
+      - Data.BinaryTree
+      - Data.Bool
+      - Data.Const
+      - Data.Either
+      - Data.Function
+      - Data.Identity
+      - Data.List
+      - Data.Maybe
+      - Data.NonEmpty
+      - Data.NonEmpty.Type
+      - Data.Ordering
+      - Data.Parser
+      - Data.Reader
+      - Data.State
+      - Data.Store
+      - Data.Stream
+      - Data.String
+      - Data.Tree
+      - Data.Tuple
+      - Typeclasses.Applicative
+      - Typeclasses.Applicative.Class
+      - Typeclasses.Applicative.Extra
+      - Typeclasses.Alternative
+      - Typeclasses.Arrow
+      - Typeclasses.Bifunctor
+      - Typeclasses.Category
+      - Typeclasses.Comonad
+      - Typeclasses.Eq
+      - Typeclasses.Foldable
+      - Typeclasses.Functor
+      - Typeclasses.Lens
+      - Typeclasses.Monad
+      - Typeclasses.Monoid
+      - Typeclasses.Numerics
+      - Typeclasses.Ord
+      - Typeclasses.Profunctor
+      # - Typeclasses.Rg
+      # - Typeclasses.Rig
+      # - Typeclasses.Rng
+      # - Typeclasses.Ring
+      - Typeclasses.Semigroup
+      - Typeclasses.Traversable
+  default-extensions:
+    - NoImplicitPrelude
+    - InstanceSigs
+    - ScopedTypeVariables
+    - RankNTypes
 
 tests:
   myPrelude-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+    main: Spec.hs
+    source-dirs: test
+    ghc-options: -threaded -rtsopts -with-rtsopts=-N
     dependencies:
-    - myPrelude
+      - base >=4.7 && <5
+      - myPrelude

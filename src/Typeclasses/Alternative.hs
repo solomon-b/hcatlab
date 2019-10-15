@@ -1,11 +1,10 @@
 module Typeclasses.Alternative where
 
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 
 import Data.Maybe
 import Data.Function 
-import Data.List
 
 class Applicative f => Alternative f where
   empty :: f a

@@ -3,7 +3,7 @@ module Data.Tree where
 import Prelude (Show, undefined)
 
 import Typeclasses.Functor
-import Typeclasses.Applicative
+import Typeclasses.Applicative.Class
 
 import Data.Function
 import Data.List
