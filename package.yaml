@@ -57,8 +57,12 @@ library:
       - Typeclasses.Eq
       - Typeclasses.Foldable
       - Typeclasses.Functor
+      - Typeclasses.Functor.Class
+      - Typeclasses.Functor.Extra
       - Typeclasses.Lens
       - Typeclasses.Monad
+      - Typeclasses.Monad.Class
+      - Typeclasses.Monad.Extra
       - Typeclasses.Monoid
       - Typeclasses.Numerics
       - Typeclasses.Ord
