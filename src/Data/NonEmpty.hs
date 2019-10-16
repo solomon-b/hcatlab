@@ -5,8 +5,9 @@ import Data.Function
 
 import Typeclasses.Semigroup
 import Typeclasses.Functor
-import Typeclasses.Applicative.Class
+import Typeclasses.Applicative
 import Typeclasses.Monad
+import Typeclasses.Foldable
 import Typeclasses.Traversable
 import Typeclasses.Comonad
 
@@ -38,6 +39,14 @@ instance Monad NonEmpty where
   (>>=) (x :| []) f = f x
   (>>=) (x :| (x':xs)) f = f x <> ((x' :| xs) >>= f)
 
+instance Foldable NonEmpty where
+  foldr :: (a -> b -> b) -> b -> NonEmpty a -> b
+  foldr f z (x :| xs) = f x (foldr f z xs)
+
+instance Traversable NonEmpty where
+  sequenceA :: Applicative f => NonEmpty (f a) ->  f (NonEmpty a)
+  sequenceA (f :| fs) = (:|) <$> f <*> (sequenceA fs)
+
 instance Comonad NonEmpty where
   extract :: NonEmpty a -> a
   extract (x :| _) = x
@@ -46,4 +55,4 @@ instance Comonad NonEmpty where
   duplicate xs@(_ :| xs') = xs :| f xs'
     where f [] = []
           f (y:ys) = (y :| ys) : f ys
-  
+

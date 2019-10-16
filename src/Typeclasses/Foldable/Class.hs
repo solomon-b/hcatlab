@@ -91,4 +91,3 @@ class Foldable t where
   sum = foldr (+) 0
   product :: Num a => t a -> a
   product = foldr (*) 1
-

@@ -37,11 +37,7 @@ instance Applicative (Reader r) where
   pure :: a -> Reader r a
   pure = Reader . const
   (<*>) :: Reader r (a -> b) -> Reader r a -> Reader r b
-  (<*>) = undefined
-  (*>) :: Reader r a -> Reader r b -> Reader r b
-  (*>) = undefined
-  (<*) :: Reader r a -> Reader r b -> Reader r a
-  (<*) = undefined
+  (<*>) rf ra = Reader $ \r -> (runReader rf r) (runReader ra r)
 
 instance Monad (Reader r) where
   return :: a -> Reader r a
@@ -52,4 +48,4 @@ instance Monad (Reader r) where
         (Reader rb) = f a
     in rb r
 
-instance Monoid r => Comonad (Reader r) where
+--instance Monoid r => Comonad (Reader r) where

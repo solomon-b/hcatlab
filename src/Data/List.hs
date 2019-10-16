@@ -7,9 +7,10 @@ import Typeclasses.Ord
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative.Class
+import Typeclasses.Applicative
 import Typeclasses.Monad
 import Typeclasses.Foldable
+import Typeclasses.Traversable
 
 import Data.Bool
 import Data.Function
@@ -58,6 +59,12 @@ instance Foldable [] where
   foldr _ b [] = b
   foldr f b (x:xs) = x `f` foldr f b xs
 
+instance Traversable [] where
+  traverse :: Applicative f => (a -> f b) -> [a] -> f [b]
+  traverse f xs = foldr (\x ys -> liftA2 (:) (f x) ys) (pure []) xs
+  sequenceA :: Applicative f => [f a] -> f [a]
+  sequenceA [] = pure []
+  sequenceA (x:xs) = (:) <$> x <*> sequenceA xs
 
 -------------------
 --- COMBINATORS ---

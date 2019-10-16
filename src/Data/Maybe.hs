@@ -8,7 +8,7 @@ import Data.Function
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
 import Typeclasses.Functor
-import Typeclasses.Applicative.Class
+import Typeclasses.Applicative
 import Typeclasses.Monad
 --import Typeclasses.Foldable
 --import Typeclasses.Traversable
@@ -56,8 +56,11 @@ instance Monad Maybe where
 --  foldr :: (a -> b -> b) -> b -> Maybe a -> b
 --  foldr _ _ Nothing = b
 --  foldr f b (Just a) = f a b
-
+--
 --instance Traversable Maybe where
+--  traverse :: Applicative f => (a -> f b) -> Maybe a -> f (Maybe b)
+--  traverse f Nothing = pure Nothing
+--  traverse f (Just x) = Just <$> f x
 --  sequenceA :: Applicative f => Maybe (f a) -> f (Maybe a)
 --  sequenceA Nothing = pure Nothing
 --  sequenceA (Just fa) = fmap Just fa

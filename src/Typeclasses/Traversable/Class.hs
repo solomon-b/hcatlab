@@ -3,7 +3,7 @@ module Typeclasses.Traversable.Class where
 import Typeclasses.Functor
 import Typeclasses.Applicative
 import Typeclasses.Monad
-import Typeclasses.Foldable
+import Typeclasses.Foldable.Class
 
 import Data.Function
 {-
@@ -28,6 +28,7 @@ composition
     sequenceA . fmap Compose = Compose . fmap sequenceA . sequenceA
 -}
 class (Functor t, Foldable t) => Traversable t where
+  {-# MINIMAL traverse | sequenceA #-}
   traverse :: Applicative f => (a -> f b) -> t a -> f (t b)
   traverse = sequenceA ... fmap
   sequenceA :: Applicative f => t (f a) -> f (t a)

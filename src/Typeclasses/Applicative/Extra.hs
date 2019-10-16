@@ -4,7 +4,7 @@ import Prelude (Bool, undefined)
 
 import Typeclasses.Functor
 import Typeclasses.Applicative.Class
-import Typeclasses.Foldable
+--import Typeclasses.Foldable.Class
 
 import Data.Function
 
