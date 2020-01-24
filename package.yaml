@@ -32,6 +32,7 @@ library:
       - Data.Const
       - Data.Either
       - Data.Function
+      - Data.Free
       - Data.Identity
       - Data.List
       - Data.Maybe
@@ -78,6 +79,7 @@ library:
     - InstanceSigs
     - ScopedTypeVariables
     - RankNTypes
+    - KindSignatures
 
 tests:
   myPrelude-test:
