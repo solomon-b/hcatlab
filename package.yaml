@@ -80,6 +80,7 @@ library:
     - ScopedTypeVariables
     - RankNTypes
     - KindSignatures
+    - TypeSynonymInstances
 
 tests:
   myPrelude-test:

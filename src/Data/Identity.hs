@@ -46,7 +46,7 @@ instance Monad Identity where
   return :: a -> Identity a
   return = pure
   (>>=) :: Identity a -> (a -> Identity b) -> Identity b
-  (>>=) a f = join $ f <$> a
+  (>>=) a f = f $ runIdentity a
 
 instance Foldable Identity where
   foldr :: (a -> b -> b) -> b -> Identity a -> b

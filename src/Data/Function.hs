@@ -31,7 +31,7 @@ id a = a
 
 fix :: (a -> a) -> a
 fix f = let x = f x in x
- 
+
 curry :: ((a, b) -> c) -> a -> b -> c
 curry f a b = f (a, b)
 

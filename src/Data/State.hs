@@ -4,23 +4,25 @@
 {-# LANGUAGE InstanceSigs #-}
 module Data.State where
 
-import Prelude (undefined)
-
 import Typeclasses.Functor
 import Typeclasses.Applicative
 import Typeclasses.Monad
 
 import Data.Function
 import Data.Identity
+import Data.Kind
 import Data.Tuple
 
-newtype StateT s m a = StateT { runStateT :: s -> m (a, s) }
 --newtype State s a = State { runState :: s -> (a, s) }
+newtype StateT s (m :: Type -> Type) a = StateT { unStateT :: s -> m (a, s) }
 
 type State s a = StateT s Identity a
 
-state :: Monad m => (s -> (a, s)) -> StateT s m a
-state f = StateT $ pure . f
+stateT :: Monad m => (s -> (a, s)) -> StateT s m a
+stateT f = StateT $ pure . f
+
+runStateT :: StateT s m a -> s -> m (a, s)
+runStateT (StateT state) s = state s
 
 runState :: State s a -> s -> (a, s)
 runState m = runIdentity . runStateT m
@@ -44,4 +46,16 @@ instance Monad m => Monad (StateT s m) where
   return :: a -> StateT s m a
   return = pure
   (>>=) :: StateT s m a -> (a -> StateT s m b) -> StateT s m b
-  (>>=) (StateT g) f = StateT $ \s -> g s >>= \(a, s') -> (runStateT $ f a) s' 
+  (>>=) (StateT g) f = StateT $ \s -> g s >>= \(a, s') -> (runStateT $ f a) s'
+
+get :: State s s
+get = state $ \s -> (s, s)
+
+put :: s -> State s ()
+put s = state $ \_ -> ((), s)
+
+state :: (s -> (a, s)) -> State s a
+state f = StateT $ Identity . f
+
+modify :: (s -> s) -> State s ()
+modify f = state $ \s -> ((), f s)
