@@ -90,6 +90,7 @@ notElem = not ... elem
 
 find :: Foldable t => (a -> Bool) -> t a -> Maybe a
 find f ta = foldr (\a b -> if f a then Just a else b) Nothing ta
+
 -- Definition from base:
 --find p = getFirst . foldMap (\ x -> First (if p x then Just x else Nothing))
 -- this wont work without a Monoid instance for First

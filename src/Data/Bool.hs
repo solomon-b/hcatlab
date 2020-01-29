@@ -22,3 +22,7 @@ otherwise = True
 bool :: a -> a -> Bool -> a
 bool x y False = x
 bool x y True  = y
+
+ifThenElse :: Bool -> a -> a -> a
+ifThenElse True  a _ = a
+ifThenElse False _ b = b
