@@ -21,8 +21,8 @@ import Typeclasses.Monad
 import Prelude (Int, String, undefined)
 
 data Union :: [Type -> Type] -> Type -> Type where
-  Here  :: f a        -> Union (f:fs) a
-  There :: Union fs a -> Union (f:fs) a
+  Here  :: f a        -> Union (f':fs) a
+  There :: Union fs a -> Union (f':fs) a
 
 class Member e es where
   inj :: e a -> Union es a
@@ -32,14 +32,14 @@ interpret :: (e a -> Union es a) -> Free (Union (e:es)) a -> Free (Union es) a
 interpret = undefined
 
 runM :: Monad m => Free (Union '[m]) a -> m a
-runM = undefined
+runM =  undefined
 
 run :: Free (Union '[]) a -> a
 run = undefined
 
-testUnion :: Union (Reader [String] : IO : fs) ()
-testUnion = There $ Here (pure ())
+testUnion :: Union (Reader [String] ': IO ': fs) ()
+testUnion = There $ Here undefined
 
-testUnionF :: Functor (Union (Reader [String] : IO : fs)) => Free
+testUnionF :: Functor (Union (Reader [String] ': IO ': fs)) => Free
        (Union (Reader [String] : IO : fs)) ()
 testUnionF = eta testUnion
