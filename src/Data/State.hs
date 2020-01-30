@@ -16,7 +16,7 @@ import Data.Tuple
 --newtype State s a = State { runState :: s -> (a, s) }
 newtype StateT s (m :: Type -> Type) a = StateT { unStateT :: s -> m (a, s) }
 
-type State s a = StateT s Identity a
+type State s = StateT s Identity
 
 stateT :: Monad m => (s -> (a, s)) -> StateT s m a
 stateT f = StateT $ pure . f

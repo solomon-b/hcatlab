@@ -49,3 +49,6 @@ instance Monad (Reader r) where
     in rb r
 
 --instance Monoid r => Comonad (Reader r) where
+
+ask :: Reader r r
+ask = Reader id

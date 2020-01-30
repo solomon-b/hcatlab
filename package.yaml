@@ -33,6 +33,7 @@ library:
       - Data.Either
       - Data.Function
       - Data.Free
+      - Data.Free.Effects
       - Data.Identity
       - Data.List
       - Data.Maybe

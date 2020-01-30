@@ -1,6 +1,6 @@
 module Data.Free where
 
-import Data.Function ((.), ($), id)
+import Data.Function ((.), ($), id, const)
 import Data.IO
 import Data.Kind
 
@@ -8,7 +8,6 @@ import Typeclasses.Functor
 import Typeclasses.Applicative
 import Typeclasses.Monad
 
-import Prelude (Int, String)
 import qualified System.Exit as E hiding (ExitSuccess)
 
 data Free (f :: Type -> Type) (a :: Type) = Pure a | Impure (f (Free f a))
@@ -96,3 +95,5 @@ echo = getLine' >>= \str ->
 
 test_run = runTeletype echo
 -}
+
+
