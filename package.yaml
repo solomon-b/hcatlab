@@ -48,6 +48,7 @@ library:
       - Data.String
       - Data.Tree
       - Data.Tuple
+      - Data.Void
       - Typeclasses.Applicative
       - Typeclasses.Applicative.Class
       - Typeclasses.Applicative.Extra

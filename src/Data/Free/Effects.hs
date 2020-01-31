@@ -1,3 +1,4 @@
+{-# LANGUAGE EmptyCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
@@ -24,6 +25,13 @@ data Union :: [Type -> Type] -> Type -> Type where
   Here  :: f a        -> Union (f':fs) a
   There :: Union fs a -> Union (f':fs) a
 
+instance Functor (Union '[]) where
+  fmap f union = case union of {}
+
+--instance Functor f => Functor (Union (f:fs)) where
+--  fmap f (Here fa) = Here (f <$> fa)
+--  fmap f (There union) = There (f <$> union)
+
 class Member e es where
   inj :: e a -> Union es a
   prj :: Union es a -> Maybe (e a)
@@ -35,7 +43,8 @@ runM :: Monad m => Free (Union '[m]) a -> m a
 runM =  undefined
 
 run :: Free (Union '[]) a -> a
-run = undefined
+run (Pure a) = a
+--run (Impure union) = let x = fmap run union in _
 
 testUnion :: Union (Reader [String] ': IO ': fs) ()
 testUnion = There $ Here undefined
