@@ -1,3 +1,4 @@
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE EmptyCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE FlexibleContexts #-}
@@ -22,19 +23,29 @@ import Typeclasses.Monad
 import Prelude (Int, String, undefined)
 
 data Union :: [Type -> Type] -> Type -> Type where
-  Here  :: f a        -> Union (f':fs) a
-  There :: Union fs a -> Union (f':fs) a
+  Here  :: f a        -> Union (f ': fs) a
+  There :: Union fs a -> Union (f ': fs) a
 
 instance Functor (Union '[]) where
-  fmap f union = case union of {}
+  fmap f = \case{}
 
---instance Functor f => Functor (Union (f:fs)) where
---  fmap f (Here fa) = Here (f <$> fa)
---  fmap f (There union) = There (f <$> union)
+instance (Functor f, Functor (Union fs)) => Functor (Union (f ': fs)) where
+  fmap f (Here fa) = Here (f <$> fa)
+  fmap f (There union) = There (f <$> union)
 
 class Member e es where
   inj :: e a -> Union es a
   prj :: Union es a -> Maybe (e a)
+
+instance {-# OVERLAPPING #-} Member e (e ': es) where
+  inj ea = Here ea
+  prj (Here fa) = Just fa
+  prj (There union) = Nothing
+
+instance {-# OVERLAPPING #-} Member e es => Member e (f ': es) where
+  inj = There . inj
+  prj (Here ea) = Nothing
+  prj (There union) = prj union
 
 interpret :: (e a -> Union es a) -> Free (Union (e:es)) a -> Free (Union es) a
 interpret = undefined
@@ -44,7 +55,9 @@ runM =  undefined
 
 run :: Free (Union '[]) a -> a
 run (Pure a) = a
---run (Impure union) = let x = fmap run union in _
+run (Impure union) = let x = fmap run union in undefined
+
+
 
 testUnion :: Union (Reader [String] ': IO ': fs) ()
 testUnion = There $ Here undefined
