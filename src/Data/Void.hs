@@ -1,7 +1,7 @@
-{-# LANGUAGE EmptyCase #-}
 module Data.Void where
 
 import Typeclasses.Functor
+
 data Void
 
 absurd :: Void -> a

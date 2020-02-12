@@ -29,8 +29,6 @@ and that pure and (<*>) satisfy the applicative functor laws.
 -}
 
 class Applicative m => Monad m where
-  -- TODO: Remove return
-  return :: a -> m a
   infixl 1 >>=
   (>>=) :: m a -> (a -> m b) ->  m b
   infixl 1 >>

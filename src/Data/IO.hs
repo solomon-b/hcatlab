@@ -1,30 +1,17 @@
-module Data.IO where
+module Data.IO ( module Data.IO
+               , module Data.IO.Type
+               , module Data.IO.Classes
+               ) where
 
-import Data.Function ((.), ($), id)
-import Data.Kind
+import Data.IO.Type
+import Data.IO.Classes
+import Data.String (String)
 
-import Typeclasses.Functor
-import Typeclasses.Applicative
-import Typeclasses.Monad
+import qualified Prelude (getLine, putStrLn)
 
-import Prelude (String)
-import qualified Prelude as P (getLine, putStrLn, Applicative(..), Monad(..), Functor(..), IO(..))
-
-type IO = P.IO
-
-instance Functor IO where
-  fmap = P.fmap
-
-instance Applicative IO where
-  pure = P.pure
-  (<*>) = (P.<*>)
-
-instance Monad IO where
-  return = pure
-  (>>=) = (P.>>=)
 
 getLine :: IO String
-getLine = P.getLine
+getLine = Prelude.getLine
 
 putStrLn :: String -> IO ()
-putStrLn = P.putStrLn
+putStrLn = Prelude.putStrLn

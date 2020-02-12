@@ -1,31 +1,23 @@
-module Data.Free where
+module Data.Free ( module Data.Free
+                 , module Data.Free.Type
+                 , module Data.Free.Classes
+                 ) where
 
 import Data.Function ((.), ($), id, const)
-import Data.IO
-import Data.Kind
+import Data.Free.Type
+import Data.Free.Classes
 
 import Typeclasses.Functor
 import Typeclasses.Applicative
 import Typeclasses.Monad
+--import Data.IO
 
-import qualified System.Exit as E hiding (ExitSuccess)
+--import Data.State
+--import Data.Identity
+--import Prelude (String, Int, Num(..))
 
-data Free (f :: Type -> Type) (a :: Type) = Pure a | Impure (f (Free f a))
+--import qualified System.Exit as E hiding (ExitSuccess)
 
-instance Functor f => Functor (Free f) where
-  fmap f (Pure a) = Pure (f a)
-  fmap f (Impure fa) = Impure (f <$$> fa)
-
-instance Functor f => Applicative (Free f) where
-  pure = Pure
-  (<*>) (Pure f) (Pure a) = Pure (f a)
-  (<*>) (Pure f) (Impure fa) = Impure (f <$$> fa)
-  (<*>) (Impure ff) fa = Impure $ (<*> fa) <$> ff
-
-instance Functor f => Monad (Free f) where
-  return = pure
-  (>>=) (Pure a) f = f a
-  (>>=) (Impure fa) f = Impure $ (>>= f) <$> fa
 
 eta :: Functor f => f a -> Free f a
 eta = Impure . fmap Pure
@@ -34,8 +26,9 @@ foldFree :: Monad m => (forall x. f x -> m x) -> Free f a -> m a
 foldFree _     (Pure a) = pure a
 foldFree morph (Impure fa) = morph fa >>= foldFree morph
 
+
 {-
-Creating a Monad from a Functor:
+--Creating a Monad from a Functor:
 
 type FState s = Free (StateT s Identity)
 
@@ -55,8 +48,7 @@ testState = putF 10 >> getF
 runFState' :: FState s a -> s -> (a, s)
 runFState' state = runIdentity . runStateT (foldFree id state)
 
-test_run = runFState' testState 0
-
+test_run = runFState testState 0
 -}
 
 {-
@@ -95,5 +87,3 @@ echo = getLine' >>= \str ->
 
 test_run = runTeletype echo
 -}
-
-

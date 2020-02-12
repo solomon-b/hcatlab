@@ -4,8 +4,8 @@ import Data.Function
 
 import Data.Maybe.Type
 
-import Typeclasses.Semigroup
-import Typeclasses.Monoid
+import Typeclasses.Semigroup.Class
+import Typeclasses.Monoid.Class
 import Typeclasses.Functor
 import Typeclasses.Applicative
 import Typeclasses.Monad

@@ -5,8 +5,10 @@ import Prelude (Bool(..), Num(..), errorWithoutStackTrace, undefined)
 import Typeclasses.Eq
 import Typeclasses.Ord
 --import Typeclasses.Ring
-import Typeclasses.Semigroup
-import Typeclasses.Monoid
+import Typeclasses.Semigroup.Class
+import Typeclasses.Semigroup.Extra
+import Typeclasses.Monoid.Class
+import Typeclasses.Monoid.Extra
 import Typeclasses.Functor
 
 import Data.Ordering

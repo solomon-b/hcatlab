@@ -10,6 +10,7 @@ import Typeclasses.Functor
 import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Comonad
+import Typeclasses.Contravariant
 
 import Prelude (undefined)
 
@@ -41,5 +42,3 @@ instance Monad (Reader r) where
     let a = ra r
         (Reader rb) = f a
     in rb r
-
---instance Monoid r => Comonad (Reader r) where
