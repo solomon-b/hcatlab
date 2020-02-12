@@ -1,6 +1,7 @@
 module Typeclasses.Contravariant.Extra where
 
 import Data.Bool
+import Data.Function
 
 import Typeclasses.Contravariant.Class
 
