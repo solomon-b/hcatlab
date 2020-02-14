@@ -1,6 +1,17 @@
 module Data.Vect.Extra where
 
+import Prelude (Int, (==))
+
+import Data.Function
+import Data.Maybe
 import Data.Vect.Type
+import Data.Vect.Classes
+
+import Typeclasses.Numerics
+import Typeclasses.Semigroup
+import Typeclasses.Monoid
+import Typeclasses.Functor
+import Typeclasses.Foldable
 
 --------------------------
 --- Smart Constructors ---
@@ -28,9 +39,6 @@ viewList (a :. as) = a : viewList as
 --- Operations ---
 ------------------
 
-(<$$>) :: (Functor f, Functor g) => (a -> b) -> f (g a) -> f (g b)
-(<$$>) = fmap . fmap
-
 vZipWith :: (a -> b -> c) -> Vect n a -> Vect n b -> Vect n c
 vZipWith _ Nil Nil = Nil
 vZipWith f (a :. as) (b :. bs) = (f a b) :. (vZipWith f as bs)
@@ -49,8 +57,8 @@ infixl 7 .*
 vconcat :: Monoid a => Vect n a -> a
 vconcat = fold
 
-transform :: (Monoid (Vect m (Sum a)), Num a) => Matrix n m a -> Vect n a -> Vect m a
-transform mat vect = getSum <$> (vconcat $ vZipWith ((<$$>) Sum . scalarMult) vect mat)
+--transform :: (Monoid (Vect m a), Num a) => Matrix n m a -> Vect n a -> Vect m a
+--transform mat vect = (vconcat $ vZipWith ((<$$>) scalarMult) vect mat)
 
 swapM :: Matrix ('S ('S 'Z)) ('S ('S 'Z)) Int
 swapM = jhat :. ihat :. Nil

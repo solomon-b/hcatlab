@@ -138,6 +138,7 @@ library:
     - EmptyCase
     - GADTs
     - FlexibleInstances
+    - FlexibleContexts
     - InstanceSigs
     - KindSignatures
     - LambdaCase

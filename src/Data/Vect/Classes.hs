@@ -7,13 +7,13 @@ import Typeclasses.Monoid.Class
 import Typeclasses.Functor.Class
 import Typeclasses.Foldable.Class
 
-instance Show a => Show (Vect n a) where
-  show Nil = "()"
-  show (a :. Nil) = "(" <> show a <> ")"
-  show vect = "(" <> f vect <> ")"
-    where f :: Show a => Vect n a -> String
-          f (a :. Nil) = show a
-          f (a :. as) = show a <> ", " <> f as
+--instance Show a => Show (Vect n a) where
+--  show Nil = "()"
+--  show (a :. Nil) = "(" <> show a <> ")"
+--  show vect = "(" <> f vect <> ")"
+--    where f :: Show a => Vect n a -> String
+--          f (a :. Nil) = show a
+--          f (a :. as) = show a <> ", " <> f as
 
 instance Semigroup (Vect 'Z a) where
   (<>) :: Vect 'Z a -> Vect 'Z a -> Vect 'Z a
@@ -32,7 +32,7 @@ instance (Monoid (Vect n a), Monoid a) => Monoid (Vect ('S n) a) where
 instance Functor (Vect n) where
   fmap :: (a -> b) -> Vect n a -> Vect n b
   fmap _ Nil = Nil
-  fmap f (a :. as) = (f a) :. (f <$> as)
+  fmap f (a :. as) = (f a) :. (fmap f as)
 
 instance Foldable (Vect n) where
   foldMap :: Monoid m => (a -> m) -> Vect n a -> m
