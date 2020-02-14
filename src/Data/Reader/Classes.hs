@@ -12,9 +12,6 @@ import Typeclasses.Monad
 import Typeclasses.Comonad
 import Typeclasses.Profunctor
 
-import Prelude (undefined)
-
-
 instance Semigroup a => Semigroup (Reader r a) where
   (<>) r1 r2 = Reader $ \r -> runReader r1 r <> runReader r2 r
 
@@ -23,8 +20,6 @@ instance Monoid a => Monoid (Reader r a) where
   mempty = Reader $ const mempty
   mappend :: Reader r a -> Reader r a -> Reader r a
   mappend = (<>)
-  mconcat :: [Reader r a] -> Reader r a
-  mconcat = undefined
 
 instance Functor (Reader r) where
   fmap :: (a -> b) -> Reader r a -> Reader r b
@@ -34,7 +29,7 @@ instance Applicative (Reader r) where
   pure :: a -> Reader r a
   pure = Reader . const
   (<*>) :: Reader r (a -> b) -> Reader r a -> Reader r b
-  (<*>) rf ra = Reader $ \r -> (runReader rf r) (runReader ra r)
+  (<*>) rf ra = Reader $ \r -> runReader rf r (runReader ra r)
 
 instance Monad (Reader r) where
   (>>=) :: Reader r a -> (a -> Reader r b) -> Reader r b
