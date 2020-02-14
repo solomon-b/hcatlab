@@ -48,6 +48,10 @@ library:
       - Data.String
       - Data.Tree
       - Data.Tuple
+      - Data.Vect
+      - Data.Vect.Type
+      - Data.Vect.Classes
+      - Data.Vect.Extra
       - Data.Void
       - Typeclasses.Applicative
       - Typeclasses.Applicative.Class
@@ -77,6 +81,8 @@ library:
       - Typeclasses.Semigroup
       - Typeclasses.Traversable
   default-extensions:
+    - DataKinds
+    - GADTs
     - NoImplicitPrelude
     - InstanceSigs
     - ScopedTypeVariables

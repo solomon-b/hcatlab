@@ -1,27 +1,17 @@
-module Data.Stream where
+module Data.Stream ( module Data.Stream
+                   , module Data.Stream.Type
+                   , module Data.Stream.Classes
+                   ) where
 
-import Prelude (Show)
+import Prelude (Num(..), Int, fromInteger, (==))
 
-import Data.Function (($))
-import Typeclasses.Functor
-import Typeclasses.Comonad
-
-data Stream a = Stream a (Stream a)
-  deriving Show
+import Data.Stream.Type
+import Data.Stream.Classes
 
 
--------------------
---- TYPECLASSES ---
--------------------
+mkStream :: (a -> a) -> a -> Stream a
+mkStream f a = Stream a (mkStream f (f a))
 
-instance Functor Stream where
-  fmap :: (a -> b) -> Stream a -> Stream b
-  fmap f (Stream a as) = Stream (f a) (fmap f as)
-
-instance Comonad Stream where
-  extract :: Stream a -> a
-  extract (Stream x xs) = x
-  extend :: (Stream a -> b) -> Stream a -> Stream b
-  extend f s@(Stream x xs) = Stream (f s) (extend f xs)
-  duplicate :: Stream a -> Stream (Stream a)
-  duplicate s@(Stream x xs) = Stream s (duplicate xs)
+takeS :: Int -> Stream a -> [a]
+takeS 0 _ = []
+takeS i (Stream a as) = a : takeS (i - 1) as
