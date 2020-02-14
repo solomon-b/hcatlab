@@ -39,7 +39,7 @@ instance Applicative List where
 
 instance Monad List where
   (>>=) :: List a -> (a -> List b) -> List b
-  (>>=) as f = foldMap f as
+  (>>=) = flip foldMap
   (>>) :: List a -> List b -> List b
   (>>) = (*>)
 

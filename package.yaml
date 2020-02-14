@@ -28,49 +28,99 @@ library:
   source-dirs: src
   exposed-modules:
       - Data.BinaryTree
+      - Data.BinaryTree.Type
+      - Data.BinaryTree.Classes
       - Data.Bool
+      - Data.Bool.Type
+      - Data.Bool.Classes
+      - Data.Bool.Extra
+      - Data.Char
+      - Data.Char.Type
+      - Data.Char.Classes
       - Data.Const
+      - Data.Const.Type
+      - Data.Const.Classes
       - Data.Either
+      - Data.Either.Type
+      - Data.Either.Classes
       - Data.Function
       - Data.Free
+      - Data.Free.Type
+      - Data.Free.Classes
       - Data.Free.Effects
       - Data.Identity
+      - Data.Identity.Type
+      - Data.Identity.Classes
       - Data.List
+      - Data.List.Type
+      - Data.List.Classes
+      - Data.List.Extra
       - Data.Maybe
+      - Data.Maybe.Type
+      - Data.Maybe.Classes
       - Data.NonEmpty
       - Data.NonEmpty.Type
+      - Data.NonEmpty.Classes
       - Data.Ordering
+      - Data.Ordering.Type
+      - Data.Ordering.Classes
       - Data.Parser
+      - Data.Parser.Type
+      - Data.Parser.Classes
       - Data.Reader
+      - Data.Reader.Type
+      - Data.Reader.Classes
       - Data.State
+      - Data.State.Type
+      - Data.State.Classes
+      - Data.State.Extra
       - Data.Store
+      - Data.Store.Type
+      - Data.Store.Classes
       - Data.Stream
+      - Data.Stream.Type
+      - Data.Stream.Classes
       - Data.String
+      - Data.String.Type
+      - Data.String.Classes
       - Data.Tree
+      - Data.Tree.Type
+      - Data.Tree.Classes
       - Data.Tuple
+      - Data.Tuple.Type
+      - Data.Tuple.Classes
       - Data.Vect
       - Data.Vect.Type
       - Data.Vect.Classes
       - Data.Vect.Extra
       - Data.Void
+      - Typeclasses.Alternative
+      - Typeclasses.Alternative.Class
+      - Typeclasses.Alternative.Extra
       - Typeclasses.Applicative
       - Typeclasses.Applicative.Class
       - Typeclasses.Applicative.Extra
-      - Typeclasses.Alternative
       - Typeclasses.Arrow
       - Typeclasses.Bifunctor
       - Typeclasses.Category
       - Typeclasses.Comonad
+      - Typeclasses.Contravariant
+      - Typeclasses.Contravariant.Class
+      - Typeclasses.Contravariant.Extra
       - Typeclasses.Eq
       - Typeclasses.Foldable
       - Typeclasses.Functor
       - Typeclasses.Functor.Class
       - Typeclasses.Functor.Extra
+      - Typeclasses.IsList
+      - Typeclasses.IsString
       - Typeclasses.Lens
       - Typeclasses.Monad
       - Typeclasses.Monad.Class
       - Typeclasses.Monad.Extra
       - Typeclasses.Monoid
+      - Typeclasses.Monoid.Class
+      - Typeclasses.Monoid.Extra
       - Typeclasses.Numerics
       - Typeclasses.Ord
       - Typeclasses.Profunctor
@@ -79,17 +129,24 @@ library:
       # - Typeclasses.Rng
       # - Typeclasses.Ring
       - Typeclasses.Semigroup
+      - Typeclasses.Semigroup.Class
+      - Typeclasses.Semigroup.Extra
       - Typeclasses.Traversable
   default-extensions:
     - DataKinds
+    - DeriveAnyClass
+    - EmptyCase
     - GADTs
-    - NoImplicitPrelude
+    - FlexibleInstances
     - InstanceSigs
-    - ScopedTypeVariables
-    - RankNTypes
     - KindSignatures
-    - TypeSynonymInstances
+    - LambdaCase
+    - NoImplicitPrelude
+    - RankNTypes
     - RebindableSyntax
+    - StandaloneDeriving
+    - ScopedTypeVariables
+    - TypeSynonymInstances
 
 tests:
   myPrelude-test:

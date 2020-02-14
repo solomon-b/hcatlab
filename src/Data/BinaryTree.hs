@@ -1,18 +1,6 @@
-module Data.BinaryTree where
+module Data.BinaryTree ( module Data.BinaryTree.Type
+                       , module Data.BinaryTree.Classes
+                       ) where
 
-import Prelude (Show)
-
-import Data.Function (($))
-import Typeclasses.Functor
-
-data BinaryTree a = Leaf a | Node (BinaryTree a) (BinaryTree a)
-
-
--------------------
---- TYPECLASSES ---
--------------------
-
-instance Functor BinaryTree where
-  fmap :: (a -> b) -> BinaryTree a -> BinaryTree b
-  fmap f (Leaf a) = Leaf $ f a
-  fmap f (Node x y) = Node (fmap f x) (fmap f y)
+import Data.BinaryTree.Type
+import Data.BinaryTree.Classes

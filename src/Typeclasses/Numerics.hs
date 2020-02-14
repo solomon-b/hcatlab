@@ -1,7 +1,6 @@
-{-# LANGUAGE DeriveAnyClass #-}
 module Typeclasses.Numerics where
 
-import Prelude (Word, Int, Integer, Float, Double, Bool, Enum, Show, undefined)
+import Prelude (Word, Int, Integer, Float, Double, Enum, Show, undefined)
 import qualified Prelude as P (Num(..), Real(..), Integral(..))
 
 import Typeclasses.Eq
@@ -14,7 +13,7 @@ import Data.Function
 -----------
 --- NUM ---
 -----------
- 
+
 class P.Num a => Num a where
   (+) :: a -> a -> a
   (+) = (P.+)
@@ -36,7 +35,7 @@ instance Num Int where
 instance Num Integer where
 instance Num Float where
 instance Num Double where
-  
+
 
 ----------------------
 --- Ratio/Rational ---
@@ -45,10 +44,12 @@ instance Num Double where
 -- | Arbitrary-precision rational numbers, represented as a ratio of
 -- two 'Integer' values.  A rational number may be constructed using
 -- the '%' operator.
-data Ratio a = !a :% !a  deriving (Eq, Show)
+data Ratio a = !a :% !a  deriving (Show)
 type Rational = Ratio Integer
 
-  
+instance Eq a => Eq (Ratio a) where
+  (==) (a :% b) (a' :% b') = a == a' && b == b'
+
 class  (Num a, Ord a) => Real a  where
   toRational :: a -> Rational
 
@@ -69,7 +70,7 @@ notANumber = 0 :% 0
 --     reduce :: Integral a => a -> a -> Ratio a
 --     reduce n y = (x `quot` d) :% (y `quot` d)
 --     d = gcd x y
--- 
+--
 -- gcd :: Integral a => a -> a -> a
 -- gcd x y = gcd' (abs x) (abs y)
 --     where
@@ -79,7 +80,7 @@ notANumber = 0 :% 0
 ----------------
 --- INTEGRAL ---
 ----------------
-  
+
 -- | Integral numbers, supporting integer division.
 --
 -- The Haskell Report defines no laws for 'Integral'. However, 'Integral'

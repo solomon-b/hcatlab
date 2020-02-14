@@ -1,3 +1,6 @@
-module Data.Ordering where
+module Data.Ordering ( module Data.Ordering.Type
+                     , module Data.Ordering.Classes
+                     ) where
 
-data Ordering = EQ | LT | GT
+import Data.Ordering.Type
+import Data.Ordering.Classes
