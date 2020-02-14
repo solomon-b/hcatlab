@@ -4,5 +4,6 @@
 <h2 id="laws">Laws</h2>
 <pre><code>fmap id  ==  id
 fmap (f . g)  ==  fmap f . fmap g</code></pre>
+<h2 id="typeclass">Typeclass</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode haskell literate"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">class</span> <span class="dt">Functor</span> f <span class="kw">where</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="ot">  fmap ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b</span></code></pre></div>
