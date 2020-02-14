@@ -23,6 +23,7 @@ class Semigroup a => Monoid a where
   mempty :: a
   mappend :: a -> a -> a
   mappend = (<>)
+  -- TODO: Solve Foldable/Monoid import cycle
   mconcat :: [a] -> a
   mconcat = foldr mappend mempty
     where foldr f z =
