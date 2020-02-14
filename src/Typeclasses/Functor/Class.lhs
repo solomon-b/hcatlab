@@ -1,13 +1,11 @@
-module Typeclasses.Functor.Class where
+> module Typeclasses.Functor.Class where
 
-{-
 The Functor class is used for types that can be mapped over. Instances of Functor should satisfy the following laws:
 
 fmap id  ==  id
 fmap (f . g)  ==  fmap f . fmap g
--}
 
 
-class Functor f where
-  fmap :: (a -> b) -> f a -> f b
+> class Functor f where
+>   fmap :: (a -> b) -> f a -> f b
 
