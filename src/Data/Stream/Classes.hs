@@ -1,6 +1,5 @@
 module Data.Stream.Classes where
 
-
 import Data.Stream.Type
 
 import Typeclasses.Semigroup

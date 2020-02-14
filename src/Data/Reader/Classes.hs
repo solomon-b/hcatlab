@@ -10,7 +10,7 @@ import Typeclasses.Functor
 import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Comonad
-import Typeclasses.Contravariant
+import Typeclasses.Profunctor
 
 import Prelude (undefined)
 
@@ -42,3 +42,7 @@ instance Monad (Reader r) where
     let a = ra r
         (Reader rb) = f a
     in rb r
+
+instance Profunctor Reader where
+  dimap :: (b -> a) -> (c -> d) -> Reader a c -> Reader b d
+  dimap f g (Reader ac) = Reader $ g . ac . f
