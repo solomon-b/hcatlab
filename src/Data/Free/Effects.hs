@@ -55,7 +55,7 @@ interpret f (Impure (There union)) = Impure $ interpret f <$> union
 runM :: Monad m => Free (Union '[m]) a -> m a
 runM (Pure a) = pure a
 runM (Impure (Here eff)) = eff >>= runM
-runM (Impure (There union)) = let x = fmap runM union in _
+runM (Impure (There union)) = let x = fmap runM union in undefined
 
 run :: Free (Union '[]) a -> a
 run (Pure a) = a
