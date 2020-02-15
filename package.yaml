@@ -92,6 +92,10 @@ library:
       - Data.Tuple
       - Data.Tuple.Type
       - Data.Tuple.Classes
+      - Data.Vect
+      - Data.Vect.Type
+      - Data.Vect.Classes
+      - Data.Vect.Extra
       - Data.Void
       - Typeclasses.Alternative
       - Typeclasses.Alternative.Class
@@ -132,9 +136,12 @@ library:
       - Typeclasses.Semigroup.Extra
       - Typeclasses.Traversable
   default-extensions:
+    - DataKinds
     - DeriveAnyClass
     - EmptyCase
+    - GADTs
     - FlexibleInstances
+    - FlexibleContexts
     - InstanceSigs
     - KindSignatures
     - LambdaCase

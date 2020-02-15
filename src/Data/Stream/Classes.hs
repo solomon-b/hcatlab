@@ -1,15 +1,18 @@
 module Data.Stream.Classes where
 
-
-import Data.Function (($))
 import Data.Stream.Type
 
+import Typeclasses.Semigroup
+import Typeclasses.Foldable
 import Typeclasses.Functor
 import Typeclasses.Comonad
 
 instance Functor Stream where
   fmap :: (a -> b) -> Stream a -> Stream b
   fmap f (Stream a as) = Stream (f a) (fmap f as)
+
+instance Foldable Stream where
+  foldMap f (Stream a rest) = f a <> foldMap f rest
 
 instance Comonad Stream where
   extract :: Stream a -> a

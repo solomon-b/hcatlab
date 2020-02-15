@@ -74,6 +74,8 @@ cofoldMap :: Monoid m => ((a -> m), t a) -> m
 class Foldable t where
   foldMap :: Monoid m => (a -> m) -> t a -> m
   foldMap f = foldr (mappend . f) mempty
+  fold :: Monoid m => t m -> m
+  fold = foldMap id
   foldr :: (a -> b -> b) -> b -> t a -> b
   foldr f z t = appEndo (foldMap (Endo . f) t) z
   foldl :: (b -> a -> b) -> b -> t a -> b
