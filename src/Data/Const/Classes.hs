@@ -2,6 +2,7 @@ module Data.Const.Classes where
 
 import Data.Const.Type
 import Data.Function
+import Data.Kind
 
 import Typeclasses.Semigroup
 import Typeclasses.Monoid
@@ -10,6 +11,7 @@ import Typeclasses.Applicative.Class
 import Typeclasses.Monad
 import Typeclasses.Foldable
 import Typeclasses.Traversable
+import Typeclasses.Contravariant
 
 import Prelude (undefined)
 
@@ -23,7 +25,7 @@ instance Monoid a => Monoid (Const a b) where
   mappend :: Const a b -> Const a b -> Const a b
   mappend = (<>)
 
-instance Functor (Const c) where
+instance Functor (Const c :: Type -> Type) where
   fmap :: (a -> b) -> Const c a -> Const c b
   fmap f (Const a) = Const a
 
@@ -40,3 +42,6 @@ instance Foldable (Const c) where
 instance Traversable (Const c) where
   sequenceA :: Const c (f a) -> f (Const c a)
   sequenceA (Const c) = undefined
+
+instance Contravariant (Const r :: Type -> Type) where
+  contramap _ (Const r) = Const r
