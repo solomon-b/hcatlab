@@ -135,6 +135,7 @@ library:
   default-extensions:
     - DataKinds
     - DeriveAnyClass
+    - DerivingVia
     - EmptyCase
     - GADTs
     - FlexibleInstances
@@ -143,10 +144,12 @@ library:
     - KindSignatures
     - LambdaCase
     - NoImplicitPrelude
+    - PolyKinds
     - RankNTypes
     - RebindableSyntax
     - StandaloneDeriving
     - ScopedTypeVariables
+    - TypeFamilies
     - TypeSynonymInstances
 
 tests:
