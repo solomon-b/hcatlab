@@ -30,7 +30,7 @@ Functors can be composed, thus fmap can be composed to lift functions into arbit
 > (<$$>) = fmap . fmap
 
 > infixl 4 <$$$>
-> (<$$$>) :: (Functor f, Functor g, Functor g) => (a -> b) -> f (g (h a)) -> f (g (h b))
+> (<$$$>) :: (Functor f, Functor g, Functor h) => (a -> b) -> f (g (h a)) -> f (g (h b))
 > (<$$$>) = fmap . fmap . fmap
 
 > infixl 1 <&>
