@@ -47,15 +47,19 @@
 >   prj (Here ea) = Nothing
 >   prj (There union) = prj union
 
-> interpret :: (e a -> Union es a) -> Free (Union (e:es)) a -> Free (Union es) a
-> interpret = undefined
+> interpret :: Functor (Union es) => (forall a. e a -> Union es a) -> Free (Union (e:es)) a -> Free (Union es) a
+> interpret f (Pure a) = Pure a
+> interpret f (Impure (Here eff)) = Impure $ interpret f <$> f eff
+> interpret f (Impure (There union)) = Impure $ interpret f <$> union
 
 > runM :: Monad m => Free (Union '[m]) a -> m a
-> runM =  undefined
+> runM (Pure a) = pure a
+> runM (Impure (Here eff)) = eff >>= runM
+> runM (Impure (There union)) = let x = fmap runM union in undefined
 
 > run :: Free (Union '[]) a -> a
 > run (Pure a) = a
-> run (Impure union) = let x = fmap run union in undefined
+> run (Impure union) = case union of {}
 
 testUnion :: Union (Reader [String] ': IO ': fs) ()
 testUnion = There $ Here undefined

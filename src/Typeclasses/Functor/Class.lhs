@@ -13,6 +13,8 @@ fmap (f . g)  ==  fmap f . fmap g
 
 == Typeclass
 
+> infixl 4 <$
 > class Functor f where
 >   fmap :: (a -> b) -> f a -> f b
+>   (<$) :: a -> f b -> f a
 

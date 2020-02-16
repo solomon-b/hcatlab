@@ -37,6 +37,9 @@ library:
       - Data.Char
       - Data.Char.Type
       - Data.Char.Classes
+      - Data.Compose
+      - Data.Compose.Type
+      - Data.Compose.Classes
       - Data.Const
       - Data.Const.Type
       - Data.Const.Classes
@@ -151,6 +154,7 @@ library:
     - ScopedTypeVariables
     - TypeFamilies
     - TypeSynonymInstances
+    - MultiParamTypeClasses
 
 tests:
   myPrelude-test:
