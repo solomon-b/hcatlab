@@ -50,6 +50,13 @@ The Fixed Point Combinator
 > fix :: (a -> a) -> a
 > fix f = let x = f x in x
 
+on b u x y runs the binary function b on the results of applying unary function
+to two arguments x and y. From the opposite perspective, it transforms two
+inputs and combines the outputs.
+
+> on :: (b -> b -> c) -> (a -> b) -> a -> a -> c
+> on f g = \x y -> g x `f` g y
+
 > curry :: ((a, b) -> c) -> a -> b -> c
 > curry f a b = f (a, b)
 

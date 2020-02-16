@@ -2,6 +2,7 @@
 
 > import Data.Bool
 > import Data.Function
+> import Data.Ordering
 
 > import Typeclasses.Functor
 > import Typeclasses.Contravariant.Class
@@ -15,6 +16,12 @@
 > instance Contravariant Predicate where
 >   contramap :: (a -> b) -> Predicate b -> Predicate a
 >   contramap f (Predicate b) = Predicate $ \a -> b (f a)
+
+> newtype Comparison a = Comparison (a -> a -> Ordering)
+
+> instance Contravariant Comparison where
+>   contramap :: (a -> b) -> Comparison b -> Comparison a
+>   contramap f (Comparison comp) = Comparison $ comp `on` f
 
 ---------------------
 --- ContraCompose ---

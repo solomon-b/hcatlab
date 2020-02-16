@@ -5,6 +5,9 @@
 > import Data.Bool
 > import Data.Function
 
+= Contravariant
+A typeclass for functors which are contravariant in their parameter.
+
 > class Contravariant f where
 >   contramap :: (a -> b) -> f b -> f a
 >   infixl 4 >$

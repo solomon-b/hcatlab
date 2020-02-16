@@ -5,6 +5,7 @@
 
 > import Typeclasses.Semigroup
 > import Typeclasses.Functor
+> import Typeclasses.Bifunctor
 > import Typeclasses.Applicative.Class
 > import Typeclasses.Monad
 > import Typeclasses.Foldable
@@ -15,6 +16,11 @@
 >   (<>) (Left a) (Left b) = Left b
 >   (<>) (Left a) _ = Left a
 >   (<>) _ (Right b) = Right b
+
+> instance Bifunctor Either where
+>   bimap :: (a -> c) -> (b -> d) -> Either a b -> Either c d
+>   bimap f _ (Left a) = Left (f a)
+>   bimap _ g (Right b) = Right (g b)
 
 > instance Functor (Either c) where
 >   fmap :: (a -> b) -> Either c a -> Either c b

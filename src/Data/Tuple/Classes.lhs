@@ -2,6 +2,7 @@
 
 > import Typeclasses.Monoid
 > import Typeclasses.Functor
+> import Typeclasses.Bifunctor
 > import Typeclasses.Applicative.Class
 > import Typeclasses.Monad
 > import Typeclasses.Comonad
@@ -9,6 +10,10 @@
 > instance Functor ((,) a) where
 >   fmap :: (b -> c) -> (a, b) -> (a, c)
 >   fmap f (a, b) = (a, f b)
+
+> instance Bifunctor (,) where
+>   bimap :: (a -> c) -> (b -> d) -> (a, b) -> (c, d)
+>   bimap f g (a, c) = (f a, g c)
 
 > instance Monoid a => Applicative ((,) a) where
 >   pure :: b -> (a, b)
