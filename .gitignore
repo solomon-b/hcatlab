@@ -2,3 +2,4 @@
 myPrelude.cabal
 *~
 dist-newstyle /
+/dist-newstyle/
