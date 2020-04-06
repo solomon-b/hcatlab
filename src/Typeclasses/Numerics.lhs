@@ -10,6 +10,84 @@
 > import Data.Function
 
 
+= Semiring
+
+The Semiring class represents a type R with two binary operations: addition and
+multiplication.
+
+= Laws
+
+== (R, +) is a commutative monoid with identity element 0
+
+- Associativity: ∀a b c ∈ R. (a + b) + c = a + (b + c)
+- Identity: ∃0 ∈ R. ∀a ∈ R. 0 + a = a = a + 0
+- Commutivity: ∀a b. a + b = b + a
+
+== (R, ·) is a monoid with identity element 1
+
+- Associativity: ∀a b c ∈ R. (a · b) · c = a · (b · c)
+- Identity: ∃1 ∈ R. ∀a ∈ R. 1 · a = a = a · 1
+
+== Multiplication left and right distributes over addition
+
+- Left Distribution: ∀a b c ∈ R. a · (b + c) = (a · b) + (a · c)
+- Right Distribution: ∀a b c ∈ R. (a + b) · c = (a · c) + (b · c)
+
+== Multiplication by 0 annihilates R:
+
+-- ∀a. 0 · a = a · 0 = 0
+
+> class Semiring r where
+>   add  :: r -> r -> r
+>   mul  :: r -> r -> r
+>   one  :: r
+>   zero :: r
+
+> infixl 6 +
+> (+) :: Semiring r => r -> r -> r
+> (+) = add
+
+> infixl 7 *
+> (*) :: Semiring r => r -> r -> r
+> (*) = mul
+
+= Ring
+
+A Ring is an Abelian Group with a second binary operation that is associative,
+is distributive over the abelian group operation, and has an identity element.
+
+= Laws
+
+A ring is a set R equipped with two binary operations + and · satisfying the
+ following three sets of axioms, called the ring axioms.
+
+== R is an Abelian Group under addition
+
+- Associativity: ∀a b c ∈ R. (a + b) + c = a + (b + c)
+- Commutivity: ∀a b ∈ R. a + b = b + a
+- Identity: ∃0 ∈ R. ∀a. a + 0 = a
+- Additive Inverse: ∀a ∈ R. ∃-a ∈ R. a + (−a) = 0
+
+== R is a Monoid under multiplication:
+
+- Associativity: ∀a b c ∈ R. (a · b) · c = a · (b · c)
+- Identity: ∃1 ∈ R. ∀a. a + 1 = a
+
+== Multiplication is distributive with respect to addition:
+
+- Left Distributivity: ∀a b c ∈ R. a ⋅ (b + c) = (a · b) + (a · c)
+- Right Distributivity: ∀a b c ∈ R. (b + c) · a = (b · a) + (c · a)
+
+> class Semiring r => Ring r where
+>   negate' :: r -> r
+
+> sub :: Ring r => r -> r -> r
+> sub x y = x + (negate' y)
+
+> infixl 6 -
+> (-) :: Ring r => r -> r -> r
+> (-) = sub
+
 -----------
 --- NUM ---
 -----------
