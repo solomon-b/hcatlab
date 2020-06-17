@@ -143,6 +143,7 @@ library
       Typeclasses.Comonad.Extra
       Typeclasses.Foldable.Class
       Typeclasses.Foldable.Extra
+      Typeclasses.Generic
       Typeclasses.MonadPlus
       Typeclasses.MonadPlus.Class
       Typeclasses.MonadPlus.Extra

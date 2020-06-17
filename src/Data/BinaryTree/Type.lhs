@@ -5,7 +5,7 @@
 The traditional decorated node Binary Tree which does not permit a monad instance.
 
 > data BinaryTree a = Leaf | Node (BinaryTree a) a (BinaryTree a)
->  deriving Show
+>   deriving Show
 
 A leafy form of Binary Tree which permits a Monad instance.
 

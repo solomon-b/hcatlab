@@ -37,19 +37,19 @@ multiplication.
 
 -- ∀a. 0 · a = a · 0 = 0
 
-> class Semiring r where
->   add  :: r -> r -> r
->   mul  :: r -> r -> r
->   one  :: r
->   zero :: r
-
-> infixl 6 +
-> (+) :: Semiring r => r -> r -> r
-> (+) = add
-
-> infixl 7 *
-> (*) :: Semiring r => r -> r -> r
-> (*) = mul
+-- > class Semiring r where
+-- >   add  :: r -> r -> r
+-- >   mul  :: r -> r -> r
+-- >   one  :: r
+-- >   zero :: r
+-- 
+-- > infixl 6 +
+-- > (+) :: Semiring r => r -> r -> r
+-- > (+) = add
+-- 
+-- > infixl 7 *
+-- > (*) :: Semiring r => r -> r -> r
+-- > (*) = mul
 
 = Ring
 
@@ -78,15 +78,15 @@ A ring is a set R equipped with two binary operations + and · satisfying the
 - Left Distributivity: ∀a b c ∈ R. a ⋅ (b + c) = (a · b) + (a · c)
 - Right Distributivity: ∀a b c ∈ R. (b + c) · a = (b · a) + (c · a)
 
-> class Semiring r => Ring r where
->   negate' :: r -> r
-
-> sub :: Ring r => r -> r -> r
-> sub x y = x + (negate' y)
-
-> infixl 6 -
-> (-) :: Ring r => r -> r -> r
-> (-) = sub
+--> class Semiring r => Ring r where
+-->   negate' :: r -> r
+--
+--> sub :: Ring r => r -> r -> r
+--> sub x y = x + (negate' y)
+--
+--> infixl 6 -
+--> (-) :: Ring r => r -> r -> r
+--> (-) = sub
 
 -----------
 --- NUM ---
