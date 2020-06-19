@@ -162,7 +162,26 @@ library
       Paths_hCatLab
   hs-source-dirs:
       src
-  default-extensions: DataKinds DeriveAnyClass DerivingVia EmptyCase GADTs FlexibleInstances FlexibleContexts InstanceSigs KindSignatures LambdaCase NoImplicitPrelude PolyKinds RankNTypes RebindableSyntax StandaloneDeriving ScopedTypeVariables TypeFamilies TypeSynonymInstances MultiParamTypeClasses
+  default-extensions:
+      DataKinds
+      DeriveAnyClass
+      DerivingVia
+      EmptyCase
+      GADTs
+      FlexibleInstances
+      FlexibleContexts
+      InstanceSigs
+      KindSignatures
+      LambdaCase
+      NoImplicitPrelude
+      PolyKinds
+      RankNTypes
+      RebindableSyntax
+      StandaloneDeriving
+      ScopedTypeVariables
+      TypeFamilies
+      TypeSynonymInstances
+      MultiParamTypeClasses
   build-depends:
       base >=4.7 && <5
     , ghc-prim
