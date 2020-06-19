@@ -54,6 +54,9 @@ library
       Data.Identity
       Data.Identity.Type
       Data.Identity.Classes
+      Data.IO
+      Data.IO.Classes
+      Data.IO.Type
       Data.List
       Data.List.Type
       Data.List.Classes
@@ -92,6 +95,9 @@ library
       Data.Tuple
       Data.Tuple.Type
       Data.Tuple.Classes
+      Data.Unit
+      Data.Unit.Type
+      Data.Unit.Classes
       Data.Vect
       Data.Vect.Type
       Data.Vect.Classes
@@ -105,57 +111,54 @@ library
       Typeclasses.Applicative.Extra
       Typeclasses.Arrow
       Typeclasses.Bifunctor
+      Typeclasses.Bifunctor.Class
+      Typeclasses.Bifunctor.Extra
       Typeclasses.Category
+      Typeclasses.Category.Class
+      Typeclasses.Category.Extra
       Typeclasses.Comonad
+      Typeclasses.Comonad.Class
+      Typeclasses.Comonad.Extra
       Typeclasses.Contravariant
       Typeclasses.Contravariant.Class
       Typeclasses.Contravariant.Extra
       Typeclasses.Eq
       Typeclasses.Foldable
+      Typeclasses.Foldable.Class
+      Typeclasses.Foldable.Extra
       Typeclasses.Functor
       Typeclasses.Functor.Class
       Typeclasses.Functor.Extra
+      Typeclasses.Generic
       Typeclasses.IsList
       Typeclasses.IsString
       Typeclasses.Lens
       Typeclasses.Monad
       Typeclasses.Monad.Class
       Typeclasses.Monad.Extra
+      Typeclasses.MonadPlus
+      Typeclasses.MonadPlus.Class
+      Typeclasses.MonadPlus.Extra
       Typeclasses.Monoid
       Typeclasses.Monoid.Class
       Typeclasses.Monoid.Extra
       Typeclasses.Numerics
       Typeclasses.Ord
       Typeclasses.Profunctor
+      Typeclasses.Profunctor.Class
+      Typeclasses.Profunctor.Extra
+      --Typeclasses.Rg
+      --Typeclasses.Rig
+      --Typeclasses.Rng
+      --Typeclasses.Ring
       Typeclasses.Semigroup
       Typeclasses.Semigroup.Class
       Typeclasses.Semigroup.Extra
       Typeclasses.Traversable
-  other-modules:
-      Data.IO
-      Data.IO.Classes
-      Data.IO.Type
-      Typeclasses.Bifunctor.Class
-      Typeclasses.Bifunctor.Extra
-      Typeclasses.Category.Class
-      Typeclasses.Category.Extra
-      Typeclasses.Comonad.Class
-      Typeclasses.Comonad.Extra
-      Typeclasses.Foldable.Class
-      Typeclasses.Foldable.Extra
-      Typeclasses.Generic
-      Typeclasses.MonadPlus
-      Typeclasses.MonadPlus.Class
-      Typeclasses.MonadPlus.Extra
-      Typeclasses.Profunctor.Class
-      Typeclasses.Profunctor.Extra
-      Typeclasses.Rg
-      Typeclasses.Rig
-      Typeclasses.Ring
-      Typeclasses.Rng
       Typeclasses.Traversable.Class
       Typeclasses.Traversable.Extra
       Typeclasses.ZipList
+  other-modules:
       Paths_hCatLab
   hs-source-dirs:
       src
