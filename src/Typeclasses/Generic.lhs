@@ -4,6 +4,8 @@
 > import Data.Bool
 > import Data.Either
 > import Data.Function
+> import Data.Unit.Type
+
 > import Typeclasses.Eq
 
 > newtype Wrap a = Wrap a
@@ -51,11 +53,11 @@
 > class GEq a where
 >   geq :: a -> a -> Bool
 
-> instance GEq () where
->   geq :: () -> () -> Bool
+> instance GEq Unit where
+>   geq :: Unit -> Unit -> Bool
 >   geq _ _ = True
 
-> instance (Generic a, Eq a) => GEq (Wrap a) where
+> instance Eq a => GEq (Wrap a) where
 >   geq (Wrap a) (Wrap b) = a == b
 
 > instance (GEq a, GEq b) => GEq (Either a b) where

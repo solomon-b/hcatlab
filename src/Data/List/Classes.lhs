@@ -1,8 +1,12 @@
 > module Data.List.Classes where
 
+> import Data.Either
+> import Data.Unit
 > import Data.Function
 > import Data.List.Type
 
+> import Typeclasses.Generic
+> import Typeclasses.Eq
 > import Typeclasses.Ord
 > import Typeclasses.Semigroup
 > import Typeclasses.Monoid
@@ -11,6 +15,20 @@
 > import Typeclasses.Monad
 > import Typeclasses.Foldable
 > import Typeclasses.Traversable
+
+> instance Generic (List a) where
+>   type Rep (List a) = Either Unit (Wrap a, Wrap (List a))
+>
+>   from :: List a -> Rep (List a)
+>   from Nil = Left Unit
+>   from (Cons x xs) = Right (Wrap x, Wrap xs)
+>
+>   to :: Rep (List a) -> List a
+>   to (Left Unit) = Nil
+>   to (Right (Wrap x, Wrap xs)) = Cons x xs
+
+> instance Eq a => Eq (List a) where
+>   (==) = eq
 
 > instance Semigroup (List a) where
 >   (<>) :: List a -> List a -> List a
